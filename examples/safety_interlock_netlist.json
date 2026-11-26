@@ -1,0 +1,25 @@
+{
+  "title": "SAFETY INTERLOCK RELAY",
+  "target_led": "ALARM_LED",
+  "theme": "kicad_blueprint",
+  "label_mode": "symbol_only",
+  "seed": 1001,
+  "nodes": [
+    {"id": "VCC1", "kind": "source", "voltage_level": 1},
+    {"id": "SW_DOOR", "kind": "switch", "closed": true},
+    {"id": "SW_ESTOP", "kind": "switch", "closed": false},
+    {"id": "F1", "kind": "fuse", "intact": true},
+    {"id": "U_INV", "kind": "gate_not"},
+    {"id": "U_LOCK", "kind": "gate_and"},
+    {"id": "ALARM_LED", "kind": "led"}
+  ],
+  "edges": [
+    {"src": "VCC1", "dst": "SW_DOOR"},
+    {"src": "VCC1", "dst": "SW_ESTOP"},
+    {"src": "SW_DOOR", "dst": "F1"},
+    {"src": "SW_ESTOP", "dst": "U_INV"},
+    {"src": "F1", "dst": "U_LOCK"},
+    {"src": "U_INV", "dst": "U_LOCK"},
+    {"src": "U_LOCK", "dst": "ALARM_LED"}
+  ]
+}
