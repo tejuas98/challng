@@ -1,0 +1,14 @@
+{
+  "total_tasks": 35,
+  "base_seed": 42,
+  "dataset_jsonl": "dataset.jsonl",
+  "families": [
+    "bridge_vs_junction",
+    "component_audit",
+    "counterfactual_pair",
+    "equivalent_resistance",
+    "fault_diagnosis",
+    "state_propagation",
+    "whole_system"
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "model_label": "gemini:gemini-3.5-flash-lite",
+  "provider": "gemini",
+  "total_tasks": 14,
+  "valid_calls": 14,
+  "error_count": 0,
+  "overall_accuracy": 0.8571,
+  "valid_only_accuracy": 0.8571,
+  "mean_latency_ms": 4008.05,
+  "by_family": {
+    "bridge_vs_junction": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "component_audit": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "counterfactual_pair": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    },
+    "equivalent_resistance": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    },
+    "fault_diagnosis": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "state_propagation": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "whole_system": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    }
+  },
+  "by_difficulty": {
+    "hard": {
+      "total": 7,
+      "correct": 5,
+      "accuracy": 0.7143
+    },
+    "medium": {
+      "total": 7,
+      "correct": 7,
+      "accuracy": 1.0
+    }
+  },
+  "by_degradation": {
+    "clean": {
+      "total": 6,
+      "correct": 5,
+      "accuracy": 0.8333
+    },
+    "low_contrast_fax": {
+      "total": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "mobile_photo": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "office_scan": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    }
+  },
+  "by_label_mode": {
+    "annotated": {
+      "total": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "symbol_only": {
+      "total": 10,
+      "correct": 8,
+      "accuracy": 0.8
+    }
+  },
+  "invariance_pairs_evaluated": 0,
+  "invariance_both_correct": 0,
+  "invariance_prediction_agreement": null,
+  "sample_failures": [
+    {
+      "task_id": "task_0023_equiva_har",
+      "family": "equivalent_resistance",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "55.81 mA",
+      "raw_response": "To find the total current drawn from the 12V supply to 0V, let's analyze the circuit configuration and the state of each switch:\n\n1. **First Section (Parallel Branch 1):**\n   - **SW1:** Closed (connects the top branch with resistor $R_1$). Therefore, resistor $R_1$ ($200\\text{ }\\Omega$) is active.\n   - **R2:** The bottom branch has no switch, so resistor $R_2$ ($200\\text{ }\\Omega$) is always active.\n   - Since both $R_1$ and $R_2$ are in parallel:\n     $$R_{p1} = \\frac{R_1 \\times R_2}{R_1 + R_2} = \\frac{200 \\times 200}{200 + 200} = \\frac{40000}{400} = 100\\text{ }\\Omega$$\n\n2. **Second Section (Parallel Branch 2):**\n   - **SW2:** Closed (connects the top branch with resistor $R_3$). Therefore, $R_3$ ($100\\text{ }\\Omega$) is active.\n   - **SW3:** Open (disconnects the middle branch with resistor $R_5$). Therefore, $R_5$ is inactive (infinite resistance).\n   - **R4:** The bottom branch has no switch, so resistor $R_4$ ($100\\text{ }\\Omega$) is always active.\n   - Since $R_3$ and $R_4$ are in parallel (and $R_5$ is disconnected):\n     $$R_{p2} = \\frac{R_3 \\times R_4}{R_3 + R_4} = \\frac{100 \\times 100}{100 + 100} = \\frac{10000}{200} = 50\\text{ }\\Omega$$\n\n3. **Total Resistance ($R_{total}$):**\n   - The two parallel sections and resistor $R_6$ ($15\\text{ }\\Omega$) are all connected in series between VCC (12V) and 0V:\n     $$R_{total} = R_{p1} + R_{p2} + R_6$$\n     $$R_{total} = 100\\text{ }\\Omega + 50\\text{ }\\Omega + 15\\text{ }\\Omega = 165\\text{ }\\Omega$$\n\n4. **Total Current ($I_{total}$):**\n   - Using Ohm's Law ($I = \\frac{V}{R}$):\n     $$I_{total} = \\frac{12\\text{ V}}{165\\text{ }\\Omega} \\approx 0.072727\\text{ A} = 72.73\\text{ mA}$$\n\nANSWER: 72.73 mA",
+      "normalized_prediction": "72.73 mA",
+      "correct": false,
+      "latency_ms": 3503.54,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0025_counte_har",
+      "family": "counterfactual_pair",
+      "difficulty": "hard",
+      "theme": "ieee_classic",
+      "degradation": "office_scan",
+      "label_mode": "symbol_only",
+      "ground_truth": "OFF -> ON",
+      "raw_response": "To determine how the state of LED L2 transitions from Panel A to Panel B, let's analyze the circuit components and connections in both panels:\n\n1. **Power and Switches:**\n   * Both circuits have a 5V VCC source on the left, connected through four switches (SW1, SW2, SW3, SW4) and a fuse (F1).\n   * **Panel A:** SW1 (closed), SW2 (closed), SW3 (open), SW4 (closed).\n   * **Panel B:** SW1 (closed), SW2 (closed), SW3 (open), SW4 (closed). The switch states are identical across both panels.\n\n2. **Logic for LED L2:**\n   * LED L2 is directly connected to the output of gate **U2** (a NOR gate).\n   * Let's determine the inputs to U2 in both panels:\n     * **Top input of U2:** Connected to the output of the NOT gate (`U_NOT`), which inverts the state of SW2. Since SW2 is closed (HIGH), `U_NOT` output is LOW.\n     * **Bottom input of U2:** Connected to the line after SW4. Since SW4 is closed (HIGH), this input is HIGH.\n   * **Gate U2 Logic:** U2 is a NOR gate with inputs $(A, B) = (\\text{LOW}, \\text{HIGH})$. \n     * Output of a NOR gate with inputs (0, 1) is **0 (LOW)**.\n     * Therefore, in **Panel A**, L2 is **OFF**.\n\n3. **Check for differences affecting U2 / L2:**\n   * Looking closely at U2 in Panel A vs Panel B:\n     * **Panel A:** U2 has a bubble at its output (NOR gate).\n     * **Panel B:** U2 has a bubble at its output (NOR gate).\n   * Looking at the connections leading into U2:\n     * Top input to U2 comes from the output of `U_NOT`.\n     * Bottom input to U2 comes from the wire controlled by SW4.\n     * These connections are identical between Panel A and Panel B.\n\nSince neither the switch states nor the logic path feeding L2 change between Panel A and Panel B, L2 remains in the same state.\n\nANSWER: OFF -> OFF",
+      "normalized_prediction": "OFF -> OFF",
+      "correct": false,
+      "latency_ms": 4300.13,
+      "invariance_partner_id": null,
+      "error": null
+    }
+  ],
+  "records": [
+    {
+      "task_id": "task_0014_state__med",
+      "family": "state_propagation",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "OFF",
+      "raw_response": "Let's trace the circuit step-by-step:\n\n1. **Power Supply (VCC):** Provides a 5V source (logic HIGH, `1`).\n2. **Switch States:**\n   - **SW1:** Closed (`1`)\n   - **SW2:** Open (`0`)\n   - **SW3:** Closed (`1`)\n3. **Gate U1 (NAND Gate):**\n   - Input 1 (Top, from SW1): `1`\n   - Input 2 (Bottom, from SW2): `0`\n   - Output of U1 = $\\text{NAND}(1, 0) = \\text{NOT}(1 \\land 0) = \\text{NOT}(0) = \\text{1}$ (HIGH)\n4. **Gate U2 (AND Gate):**\n   - Input 1 (Top, from SW2): `0`\n   - Input 2 (Bottom, from SW3): `1`\n   - Output of U2 = $\\text{AND}(0, 1) = 0$ (LOW)\n5. **Gate U3 (NOR Gate):**\n   - Input 1 (Top, from U1 output): `1`\n   - Input 2 (Bottom, from U2 output): `0`\n   - Output of U3 = $\\text{NOR}(1, 0) = \\text{NOT}(1 \\lor 0) = \\text{NOT}(1) = 0$ (LOW)\n6. **Indicator LED L1:**\n   - Connected to the output of U3 ($0$) and grounded. Since the voltage across it is 0V, the LED remains unpowered.\n\nANSWER: OFF",
+      "normalized_prediction": "OFF",
+      "correct": true,
+      "latency_ms": 4154.16,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0015_bridge_med",
+      "family": "bridge_vs_junction",
+      "difficulty": "medium",
+      "theme": "ieee_classic",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "L2, L3",
+      "raw_response": "To determine which lamps receive 5V power, let's trace the connections from the power sources (BUS1, BUS2, and BUS3):\n\n1. **Power Source Identification:**\n   - **BUS1:** Connected to **0V**\n   - **BUS2:** Connected to **0V**\n   - **BUS3:** Connected to **5V**\n\n2. **Tracing BUS3 (5V):**\n   - The line for BUS3 starts at **5V** and runs horizontally to the right.\n   - It crosses the vertical line coming down from BUS1 with a **curved bridge jump** (meaning it is **isolated/not connected** to BUS1).\n   - It also crosses the horizontal line from BUS2 with a **curved bridge jump** (isolated).\n   - Continuing right along the BUS3 line, it hits a **solid solder junction dot** around column 3 connected to switch SW2 and fuse F2.\n   - Continuing further right along the BUS3 line, it hits another **solid solder junction dot** around column 4.5 connected to switch SW3.\n   - Notice that the vertical line coming down from the left (connected to BUS1 at 0V) goes past BUS2 and BUS3 (via bridge jumps) down to switch SW1. Therefore, switch SW1 is connected to **0V** (BUS1), not 5V.\n\n3. **Tracing the Loads (L1, L2, L3):**\n   - **L1:** Connected via switch **SW1** to the line originating from **BUS1 (0V)**. It does not connect to the 5V bus.\n   - **L2:** Connected to the 5V line via a junction, passing through **SW2** and fuse **F2**, leading directly to lamp **L2**. Since it is connected to BUS3 (5V), **L2 receives 5V power**.\n   - **L3:** Connected to the 5V line via a junction, passing through switch **SW3**, leading directly to lamp **L3**. Since it is connected to BUS3 (5V), **L3 receives 5V power**.\n\nTherefore, the lamps that receive 5V power are L2 and L3.\n\nANSWER: L2, L3",
+      "normalized_prediction": "L2, L3",
+      "correct": true,
+      "latency_ms": 4846.66,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0016_equiva_med",
+      "family": "equivalent_resistance",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "120 mA",
+      "raw_response": "To find the total current drawn from the 12V supply, we need to calculate the equivalent resistance ($R_{eq}$) of the entire circuit network connected between $VCC$ ($12\\text{V}$) and $0\\text{V}$ ($GND$).\n\n**1. Analyze the components:**\n* **$R_1$**: Connected in series with the rest of the circuit. \n  $$R_1 = 10\\ \\Omega$$\n\n* **First Parallel Block (containing $SW_1$, $R_2$, and $R_3$):**\n  * The top branch has switch $SW_1$ (which is **CLOSED**) in series with resistor $R_2 = 100\\ \\Omega$. Since the switch is closed, this branch has a resistance of $100\\ \\Omega$.\n  * The bottom branch has resistor $R_3 = 100\\ \\Omega$.\n  * These two branches are in parallel:\n    $$R_{parallel1} = \\frac{R_2 \\times R_3}{R_2 + R_3} = \\frac{100 \\times 100}{100 + 100} = \\frac{10000}{200} = 50\\ \\Omega$$\n\n* **Second Parallel Block (containing $R_4$ and $R_5$):**\n  * The top branch has resistor $R_4 = 80\\ \\Omega$.\n  * The bottom branch has resistor $R_5 = 80\\ \\Omega$.\n  * These two branches are in parallel:\n    $$R_{parallel2} = \\frac{R_4 \\times R_5}{R_4 + R_5} = \\frac{80 \\times 80}{80 + 80} = \\frac{6400}{160} = 40\\ \\Omega$$\n\n**2. Calculate Total Equivalent Resistance ($R_{eq}$):**\nThe three parts ($R_1$, $R_{parallel1}$, and $R_{parallel2}$) are connected in series with each other:\n$$R_{eq} = R_1 + R_{parallel1} + R_{parallel2}$$\n$$R_{eq} = 10\\ \\Omega + 50\\ \\Omega + 40\\ \\Omega = 100\\ \\Omega$$\n\n**3. Calculate Total Current ($I_{total}$):**\nUsing Ohm's Law ($I = \\frac{V}{R_{eq}}$):\n$$I_{total} = \\frac{12\\text{V}}{100\\ \\Omega} = 0.12\\text{ A} = 120\\text{ mA}$$\n\nANSWER: 120 mA",
+      "normalized_prediction": "120 mA",
+      "correct": true,
+      "latency_ms": 5183.69,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0017_fault__med",
+      "family": "fault_diagnosis",
+      "difficulty": "medium",
+      "theme": "high_contrast_mono",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "D",
+      "raw_response": "To determine the correct fault, let's analyze the circuit and the probe readings:\n\n1. **Given Probe Readings:**\n   - **TP1:** $5\\text{V (HIGH)}$ \u2014 This means the power supply `VCC1` and fuse `F1` are functioning correctly, delivering $5\\text{V}$ up to `SW1` (assuming `SW1` is closed).\n   - **TP2:** $0\\text{V (LOW)}$ \u2014 This is the output of gate `U1` (a NAND gate).\n   - **TP3:** $5\\text{V (HIGH)}$ \u2014 This is the output of gate `U2` (a NOR/XNOR-like gate driving the lamp `L1`).\n\n2. **Circuit Analysis & Gate Inputs:**\n   - **`VCC1` ($5\\text{V}$ / HIGH)** goes through `F1` and `SW1` to:\n     - The top input of `U1`.\n   - **`VCC2` ($0\\text{V}$ / LOW)** goes through `SW2` to:\n     - The bottom input of `U1`.\n     - One of the inputs of `U2`.\n   - Therefore, the inputs to `U1` (NAND) are **HIGH** ($5\\text{V}$) and **LOW** ($0\\text{V}$).\n   - A normal NAND gate with inputs $(1, 0)$ should output **HIGH** ($5\\text{V}$).\n   - However, **TP2 shows $0\\text{V}$ (LOW)**, which means `U1`'s output is LOW instead of HIGH. This directly matches **Candidate D** (\"Gate U1 output stuck LOW\").\n\n3. Let's check **TP3** with this condition:\n   - `U1` output (TP2) is LOW ($0\\text{V}$).\n   - The other input to `U2` from `VCC2` is also LOW ($0\\text{V}$).\n   - `U2` receives two LOW inputs. If `U2` is a NOR gate, two LOW inputs normally produce a **HIGH** ($5\\text{V}$) output.\n   - This matches **TP3: 5V (HIGH)**.\n\nThus, all observed readings are uniquely explained by the output of `U1` being stuck at low.\n\nANSWER: D",
+      "normalized_prediction": "D",
+      "correct": true,
+      "latency_ms": 3909.38,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0018_counte_med",
+      "family": "counterfactual_pair",
+      "difficulty": "medium",
+      "theme": "high_contrast_mono",
+      "degradation": "low_contrast_fax",
+      "label_mode": "annotated",
+      "ground_truth": "ON -> ON",
+      "raw_response": "To determine how the state of LED L1 transitions from Panel A to Panel B, let's analyze both circuits:\n\n1. **Common Circuit Configuration:**\n   - **Power Supply:** VCC (5V) feeds into three switches: SW1 (Closed), SW2 (Open), and SW3 (Closed).\n   - **Inputs to Gates (U1 NAND and U2 AND):**\n     - SW1 is **CLOSED**, so VCC connects to the top rail feeding the gates.\n     - SW2 is **OPEN**, so no power flows through the middle branch.\n     - SW3 is **CLOSED**, so VCC connects to the bottom rail feeding the gates.\n   - **Gate Logic:**\n     - **U1 (NAND Gate):** Takes inputs from the top and bottom rails. Since both lines are powered (via SW1 and SW3), its inputs are both HIGH (1). A NAND gate with inputs (1, 1) outputs LOW (0).\n     - **U2 (AND Gate):** Takes inputs similarly. With both inputs HIGH (1), an AND gate outputs HIGH (1).\n   - **U3 (OR Gate):** Takes inputs from U1 (0) and U2 (1). An OR gate with inputs (0, 1) outputs HIGH (1), which normally lights up LED **L1**.\n\n2. **Panel A (Baseline Circuit):**\n   - **Fuse F1 (OK):** The fuse is intact, allowing current to flow from VCC through SW1.\n   - **Result:** The logic functions normally, U3 outputs HIGH, and **L1 is ON**.\n\n3. **Panel B (Revised Circuit):**\n   - **Fuse F1 (BLOWN):** The fuse is shown as blown/open. This disconnects the top rail (SW1 path) from VCC.\n   - **Effect on Gates:** \n     - The top input to U1 and U2 loses power (drops to 0).\n     - **U1 (NAND):** Now receives inputs (0, 1), so it outputs HIGH (1).\n     - **U2 (AND):** Now receives inputs (0, 1), so it outputs LOW (0).\n     - **U3 (OR):** Receives inputs from U1 (1) and U2 (0). An OR gate with inputs (1, 0) outputs HIGH (1).\n     - *Wait*, let's re-verify the fuse connection: Fuse F1 is in series with SW1 only. Does cutting SW1 change the output? \n       - Top rail input = 0 (due to blown fuse F1).\n       - Bottom rail input = 1 (SW3 is closed).\n       - U1 (NAND) inputs: Top=0, Bottom=1 $\\rightarrow$ Output = 1 (HIGH).\n       - U2 (AND) inputs: Top=0, Bottom=1 $\\rightarrow$ Output = 0 (LOW).\n       - U3 (OR) inputs: U1=1, U2=0 $\\rightarrow$ Output = 1 (HIGH).\n       - **Correction:** Even with F1 blown, the bottom rail is still powered via SW3, which keeps one input to both gates high, resulting in U3 still outputting HIGH. \n\nLet's double-check the visual difference: In Panel B, fuse F1 is blown. However, does it actually alter the logical state of L1? \nLooking closely at the wiring: \n- SW3 is closed, supplying power to the lower input branches of both U1 and U2. \n- SW1 also supplies power through F1 to the upper input branches. \n- Since both U1 and U2 require *both* inputs to be high for certain states (U1 NAND needs both to output 0, U2 AND needs both to output 1):\n  - In Panel A: Both SW1 and SW3 are closed $\\rightarrow$ Both upper and lower inputs are HIGH (1,1).\n    - U1 (NAND of 1,1) = 0\n    - U2 (AND of 1,1) = 1\n    - U3 (OR of 0,1) = 1 (**ON**)\n  - In Panel B: F1 is blown $\\rightarrow$ Upper input is LOW (0), lower input is HIGH (1).\n    - U1 (NAND of 0,1) = 1\n    - U2 (AND of 0,1) = 0\n    - U3 (OR of 1,0) = 1 (**ON**)\n\nBoth circuits result in L1 being ON.\n\nANSWER: ON -> ON",
+      "normalized_prediction": "ON -> ON",
+      "correct": true,
+      "latency_ms": 5892.19,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0019_compon_med",
+      "family": "component_audit",
+      "difficulty": "medium",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "1",
+      "raw_response": "To find how many switches are visually in the OPEN (disconnected) position, let's inspect each switch (`SW1`, `SW2`, and `SW3`):\n\n1. **SW1** (Row A): The contact blade is closed (connecting the two terminals horizontally).\n2. **SW2** (Row B): The contact blade is tilted upward, visibly **open** (disconnected).\n3. **SW3** (Row C): The contact blade is closed (connecting the two terminals horizontally).\n\nThere is only 1 switch in the open position.\n\nANSWER: 1",
+      "normalized_prediction": "1",
+      "correct": true,
+      "latency_ms": 2367.81,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0020_whole__med",
+      "family": "whole_system",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1=ON, L2=ON",
+      "raw_response": "To find the steady-state outputs of lamps L1 and L2, let's trace the circuit state step-by-step from the $12\\text{V}$ VCC power source through the components:\n\n1. **Power Supply and Fuse:** \n   - VCC supplies power ($12\\text{V}$, logic HIGH / `1`) through the intact fuse **F1**.\n\n2. **Switches Status:**\n   - **SW1:** Closed (connects VCC to the upper input of gate U1).\n   - **SW2:** Closed (connects VCC to the input of inverter `U_NOT`).\n   - **SW3:** Open (disconnects VCC from the bottom input of gate U2, holding that input at logic `0`).\n\n3. **Logic Gates:**\n   - **SW1 is Closed** $\\rightarrow$ Upper input of OR gate **U1** is HIGH (`1`).\n   - **SW2 is Closed** $\\rightarrow$ Input to inverter **U_NOT** is HIGH (`1`), making the output of `U_NOT` LOW (`0`).\n   - **Gate U1:** Receives inputs `1` (from SW1) and `0` (from `U_NOT`). Since it is an OR gate, its output is $1 \\lor 0 =$ **`1` (HIGH)**.\n   - **Gate U2:** Receives inputs from U1's output (`1`) and SW3 (`0` because the switch is open). Since it is an OR gate, its output is $1 \\lor 0 =$ **`1` (HIGH)**.\n\n4. **Lamp Outputs:**\n   - **L1** is connected directly to the output of gate U1. Since U1's output is HIGH (`1`), **L1 = ON**.\n   - **L2** is connected directly to the output of gate U2. Since U2's output is HIGH (`1`), **L2 = ON**.\n\nANSWER: L1=ON, L2=ON",
+      "normalized_prediction": "L1=ON, L2=ON",
+      "correct": true,
+      "latency_ms": 3726.7,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0021_state__har",
+      "family": "state_propagation",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "office_scan",
+      "label_mode": "annotated",
+      "ground_truth": "ON",
+      "raw_response": "To determine the state of LED L2, let's trace the circuit step-by-step:\n\n1. **Power Supply:** \n   - $V_{CC}$ provides $5\\text{V}$ (Logic **1**).\n\n2. **Switches and Fuse Initial States:**\n   - **SW1:** OPEN $\\rightarrow$ Logic **0**\n   - **F1 (OK):** Intact (conducts) $\\rightarrow$ Input to top of U1 is **0**\n   - **SW2:** Drawn as CLOSED. When toggled to the **OPPOSITE** position, it becomes **OPEN** $\\rightarrow$ Logic **0**.\n   - **SW3:** CLOSED $\\rightarrow$ Logic **1**\n   - **SW4:** CLOSED $\\rightarrow$ Logic **1**\n\n3. **Trace to U2 (AND Gate):**\n   - **U2 Inputs:**\n     - Top input comes from the output of `U_NOT`, which inverts SW2. Since SW2 is now **0** (open), `U_NOT` outputs **1**.\n     - Bottom input comes from SW4, which is CLOSED ($\\rightarrow$ **1**).\n   - **U2 Output:** \n     - Both inputs to U2 are **1** and **1**.\n     - $1 \\text{ AND } 1 = \\mathbf{1}$.\n\n4. **LED L2 State:**\n   - The output of U2 connects directly to LED L2.\n   - Since U2's output is **1**, LED L2 receives power and turns ON.\n\nANSWER: ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 2944.27,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0022_bridge_har",
+      "family": "bridge_vs_junction",
+      "difficulty": "hard",
+      "theme": "kicad_blueprint",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1, L2",
+      "raw_response": "To determine which indicator lamps receive power, let's trace the connections from **BUS3 (5V)**:\n\n1. **BUS3 Source**: Connects to 5V on the left side (Grid B-1).\n2. **Branch 1 (L1 path)**:\n   * Taps off at Grid B-2 (yellow junction dot).\n   * Goes down through switch **SW1** (currently closed).\n   * Connects to lamp **L1**.\n   * **Result**: **L1 receives 5V** (assuming the other side goes to ground, which the symbol indicates).\n\n3. **Branch 2 (L2 path)**:\n   * Taps off at Grid B-3 (yellow junction dot).\n   * Goes down through switch **SW2** (closed) and fuse **F2**.\n   * Connects to lamp **L2**.\n   * **Result**: **L2 receives 5V**.\n\n4. **Branch 3 (L3 path)**:\n   * The line continues past column 3. Notice the crossings at column 4. \n   * It encounters a curved bridge jump over **BUS2**, but then hits a solid yellow junction dot on **BUS1 (0V)**. This creates a short circuit path to 0V or intercepts the line. \n   * Tracing the vertical line down from the junction at column 4/5: it goes down to switch **SW3** (open). Because SW3 is open, no power reaches **L3** anyway.\n   * **Result**: **L3 does not receive 5V**.\n\nTherefore, the lamps that receive 5V power are L1 and L2.\n\nANSWER: L1, L2",
+      "normalized_prediction": "L1, L2",
+      "correct": true,
+      "latency_ms": 2934.66,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0023_equiva_har",
+      "family": "equivalent_resistance",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "55.81 mA",
+      "raw_response": "To find the total current drawn from the 12V supply to 0V, let's analyze the circuit configuration and the state of each switch:\n\n1. **First Section (Parallel Branch 1):**\n   - **SW1:** Closed (connects the top branch with resistor $R_1$). Therefore, resistor $R_1$ ($200\\text{ }\\Omega$) is active.\n   - **R2:** The bottom branch has no switch, so resistor $R_2$ ($200\\text{ }\\Omega$) is always active.\n   - Since both $R_1$ and $R_2$ are in parallel:\n     $$R_{p1} = \\frac{R_1 \\times R_2}{R_1 + R_2} = \\frac{200 \\times 200}{200 + 200} = \\frac{40000}{400} = 100\\text{ }\\Omega$$\n\n2. **Second Section (Parallel Branch 2):**\n   - **SW2:** Closed (connects the top branch with resistor $R_3$). Therefore, $R_3$ ($100\\text{ }\\Omega$) is active.\n   - **SW3:** Open (disconnects the middle branch with resistor $R_5$). Therefore, $R_5$ is inactive (infinite resistance).\n   - **R4:** The bottom branch has no switch, so resistor $R_4$ ($100\\text{ }\\Omega$) is always active.\n   - Since $R_3$ and $R_4$ are in parallel (and $R_5$ is disconnected):\n     $$R_{p2} = \\frac{R_3 \\times R_4}{R_3 + R_4} = \\frac{100 \\times 100}{100 + 100} = \\frac{10000}{200} = 50\\text{ }\\Omega$$\n\n3. **Total Resistance ($R_{total}$):**\n   - The two parallel sections and resistor $R_6$ ($15\\text{ }\\Omega$) are all connected in series between VCC (12V) and 0V:\n     $$R_{total} = R_{p1} + R_{p2} + R_6$$\n     $$R_{total} = 100\\text{ }\\Omega + 50\\text{ }\\Omega + 15\\text{ }\\Omega = 165\\text{ }\\Omega$$\n\n4. **Total Current ($I_{total}$):**\n   - Using Ohm's Law ($I = \\frac{V}{R}$):\n     $$I_{total} = \\frac{12\\text{ V}}{165\\text{ }\\Omega} \\approx 0.072727\\text{ A} = 72.73\\text{ mA}$$\n\nANSWER: 72.73 mA",
+      "normalized_prediction": "72.73 mA",
+      "correct": false,
+      "latency_ms": 3503.54,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0024_fault__har",
+      "family": "fault_diagnosis",
+      "difficulty": "hard",
+      "theme": "ieee_classic",
+      "degradation": "mobile_photo",
+      "label_mode": "annotated",
+      "ground_truth": "C",
+      "raw_response": "To find the correct fault, let's analyze the circuit components and the given test point (TP) measurements:\n\n1. **Circuit Topology:**\n   - **VCC1** (5V) goes through Fuse **F1** (OK) and closed switch **SW1** to the top input of **OR gate U1**.\n   - **VCC2** (5V) goes through closed switch **SW2** to:\n     - The bottom input of **OR gate U1**.\n     - The bottom input of **OR gate U2**.\n   - **U1** is an OR gate whose inputs are connected to VCC1 (via SW1) and VCC2 (via SW2). Normally, both are HIGH (5V), so U1 output should be HIGH (5V).\n   - **U2** is an OR gate with:\n     - Top input connected to U1's output (measured at **TP2**).\n     - Bottom input connected to VCC2 (5V).\n     - Output connected to lamp **L1** (measured at **TP3**).\n     - Since U2's bottom input is tied directly to VCC2 (5V), an OR gate with at least one HIGH input should normally output HIGH (5V) regardless of U1's output.\n\n2. **Observed Measurements:**\n   - **TP1: 5V (HIGH)** \u2014 Confirms VCC1 and F1 are working correctly.\n   - **TP2: 0V (LOW)** \u2014 This is the output of Gate U1. Since both inputs to U1 should be HIGH (5V), a normal OR gate would output 5V. Therefore, **U1's output is stuck LOW**.\n   - **TP3: 5V (HIGH)** \u2014 This is the output of Gate U2. Since U2's bottom input is connected to 5V (HIGH), the output of U2 naturally reads 5V (HIGH) due to the OR logic receiving a HIGH input from VCC2, which matches the expected behavior for U2.\n\nLooking at the candidate faults:\n- A: Gate U2 output stuck LOW\n- B: Gate U2 output stuck HIGH\n- C: Gate U1 output stuck LOW\n- D: Fuse F1 blown open\n\nOption **C** matches the anomaly observed at TP2 (U1 output is stuck at 0V despite inputs being high).\n\nANSWER: C",
+      "normalized_prediction": "C",
+      "correct": true,
+      "latency_ms": 4926.25,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0025_counte_har",
+      "family": "counterfactual_pair",
+      "difficulty": "hard",
+      "theme": "ieee_classic",
+      "degradation": "office_scan",
+      "label_mode": "symbol_only",
+      "ground_truth": "OFF -> ON",
+      "raw_response": "To determine how the state of LED L2 transitions from Panel A to Panel B, let's analyze the circuit components and connections in both panels:\n\n1. **Power and Switches:**\n   * Both circuits have a 5V VCC source on the left, connected through four switches (SW1, SW2, SW3, SW4) and a fuse (F1).\n   * **Panel A:** SW1 (closed), SW2 (closed), SW3 (open), SW4 (closed).\n   * **Panel B:** SW1 (closed), SW2 (closed), SW3 (open), SW4 (closed). The switch states are identical across both panels.\n\n2. **Logic for LED L2:**\n   * LED L2 is directly connected to the output of gate **U2** (a NOR gate).\n   * Let's determine the inputs to U2 in both panels:\n     * **Top input of U2:** Connected to the output of the NOT gate (`U_NOT`), which inverts the state of SW2. Since SW2 is closed (HIGH), `U_NOT` output is LOW.\n     * **Bottom input of U2:** Connected to the line after SW4. Since SW4 is closed (HIGH), this input is HIGH.\n   * **Gate U2 Logic:** U2 is a NOR gate with inputs $(A, B) = (\\text{LOW}, \\text{HIGH})$. \n     * Output of a NOR gate with inputs (0, 1) is **0 (LOW)**.\n     * Therefore, in **Panel A**, L2 is **OFF**.\n\n3. **Check for differences affecting U2 / L2:**\n   * Looking closely at U2 in Panel A vs Panel B:\n     * **Panel A:** U2 has a bubble at its output (NOR gate).\n     * **Panel B:** U2 has a bubble at its output (NOR gate).\n   * Looking at the connections leading into U2:\n     * Top input to U2 comes from the output of `U_NOT`.\n     * Bottom input to U2 comes from the wire controlled by SW4.\n     * These connections are identical between Panel A and Panel B.\n\nSince neither the switch states nor the logic path feeding L2 change between Panel A and Panel B, L2 remains in the same state.\n\nANSWER: OFF -> OFF",
+      "normalized_prediction": "OFF -> OFF",
+      "correct": false,
+      "latency_ms": 4300.13,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0026_compon_har",
+      "family": "component_audit",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "1",
+      "raw_response": "To determine how many switches are visually in the CLOSED position, let's inspect each switch (SW1 through SW4) from top to bottom:\n\n1. **SW1** (Row A): The contact blade is angled upward and not touching the terminal contacts. It is **open**.\n2. **SW2** (Row B): The contact blade is angled upward and not touching the terminal contacts. It is **open**.\n3. **SW3** (Row C): The contact blade is horizontal and physically bridging the gap between the two terminal contacts. It is **closed**.\n4. **SW4** (Row D): The contact blade is angled upward and not touching the terminal contacts. It is **open**.\n\nOut of the four switches, only SW3 is visibly closed.\n\nANSWER: 1",
+      "normalized_prediction": "1",
+      "correct": true,
+      "latency_ms": 3436.58,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0027_whole__har",
+      "family": "whole_system",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "annotated",
+      "ground_truth": "ON",
+      "raw_response": "To determine the state of indicator L1 when SW1 is toggled to its opposite position (CLOSED), let's trace the logic circuit step-by-step:\n\n1. **Power Supply & Fuse:** \n   - VCC is 24V and the fuse F1 is OK (intact), providing power to the circuit.\n\n2. **Switches State:**\n   - **SW1:** Toggled from OPEN (as shown) to **CLOSED**.\n   - **SW2:** **CLOSED** (as shown).\n   - **SW3:** **OPEN** (as shown).\n   - **SW4:** **CLOSED** (as shown).\n\n3. **Inputs to Gate U1 (NAND):**\n   - **Top input (from SW1):** SW1 is now **CLOSED**, so this input is **HIGH (1)**.\n   - **Bottom input (from U_NOT):** SW2 is CLOSED, so the input to `U_NOT` is HIGH (1), making its output **LOW (0)**.\n   - **U1 Output (NAND):** Since inputs are 1 and 0, the NAND gate output is **HIGH (1)**.\n\n4. **Inputs to Gate U2 (OR):**\n   - **Top input (from SW3):** SW3 is OPEN, so this input is **LOW (0)**.\n   - **Bottom input (from SW4):** SW4 is CLOSED, so this input is **HIGH (1)**.\n   - **U2 Output (OR):** Since one input is 1, the OR gate output is **HIGH (1)**.\n\n5. **Inputs to Gate U3 (OR):**\n   - **Top input (from U1):** **HIGH (1)**.\n   - **Bottom input (from U2):** **HIGH (1)**.\n   - **U3 Output (OR):** Since at least one input is HIGH, the output of U3 is **HIGH (1)**.\n\n6. **Indicator L1 State:**\n   - Indicator L1 connects to the output of U3. Since U3 output is HIGH (1), current flows through L1, turning it ON.\n\nANSWER: ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 3986.62,
+      "invariance_partner_id": null,
+      "error": null
+    }
+  ]
+}

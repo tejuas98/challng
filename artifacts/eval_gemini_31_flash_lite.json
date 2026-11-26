@@ -1,0 +1,330 @@
+{
+  "model_label": "gemini:gemini-3.1-flash-lite",
+  "provider": "gemini",
+  "total_tasks": 14,
+  "valid_calls": 14,
+  "error_count": 0,
+  "overall_accuracy": 0.8571,
+  "valid_only_accuracy": 0.8571,
+  "mean_latency_ms": 6446.09,
+  "by_family": {
+    "bridge_vs_junction": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "component_audit": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "counterfactual_pair": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "equivalent_resistance": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "fault_diagnosis": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "state_propagation": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "whole_system": {
+      "total": 2,
+      "correct": 0,
+      "accuracy": 0.0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "total": 14,
+      "correct": 12,
+      "accuracy": 0.8571
+    }
+  },
+  "by_degradation": {
+    "clean": {
+      "total": 5,
+      "correct": 4,
+      "accuracy": 0.8
+    },
+    "low_contrast_fax": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "mobile_photo": {
+      "total": 7,
+      "correct": 6,
+      "accuracy": 0.8571
+    }
+  },
+  "by_label_mode": {
+    "annotated": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "symbol_only": {
+      "total": 12,
+      "correct": 10,
+      "accuracy": 0.8333
+    }
+  },
+  "invariance_pairs_evaluated": 7,
+  "invariance_both_correct": 6,
+  "invariance_prediction_agreement": 1.0,
+  "sample_failures": [
+    {
+      "task_id": "task_0012_whole__eas",
+      "family": "whole_system",
+      "difficulty": "easy",
+      "theme": "ieee_classic",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "0 mA",
+      "raw_response": "To find the current, we must first determine the state of the circuit based on the logic gates U1 and U2.\n\n1.  **Analyze U1 (NOR Gate):**\n    *   U1 is a NOR gate. Its output is HIGH (1) only if both inputs (from SW1 and SW2) are LOW (0).\n    *   If SW1 or SW2 is closed (connected to VCC), the input to U1 is HIGH.\n    *   The output of U1 drives **L1**. Thus, L1 is ON only if SW1=OFF and SW2=OFF.\n\n2.  **Analyze U2 (AND Gate) and the Load Driver Rule:**\n    *   U2 is an AND gate. Its output is HIGH only if both inputs are HIGH.\n    *   The inputs to U2 are:\n        *   The output of U1 (which is the signal for L1).\n        *   The state of SW3.\n    *   The \"Load Driver Rule\" states: \"When L1=ON (U2=HIGH & F1 intact), 12V VCC powers R-bank to 0V\".\n    *   Wait, let's re-examine the logic:\n        *   For L1 to be ON, U1 must output HIGH (SW1=OFF, SW2=OFF).\n        *   The \"Load Driver Rule\" says current flows to the R-bank when L1=ON and U2=HIGH.\n        *   If L1 is ON, U1 output is HIGH. For U2 to be HIGH, the other input (SW3) must also be closed (connected to VCC).\n        *   Therefore, the load bank is powered only when **SW1=OFF, SW2=OFF, and SW3=ON**.\n\n3.  **Calculate Current (R-bank):**\n    *   When the conditions are met, the R-bank (R1 and R2 in parallel) is connected to 12V.\n    *   $R1 = 120\\ \\Omega$, $R2 = 40\\ \\Omega$.\n    *   Equivalent resistance $R_p = \\frac{R1 \\cdot R2}{R1 + R2} = \\frac{120 \\cdot 40}{120 + 40} = \\frac{4800}{160} = 30\\ \\Omega$.\n    *   Using Ohm's Law ($I = V / R$):\n    *   $I = 12V / 30\\ \\Omega = 0.4\\ A$.\n    *   Convert to mA: $0.4\\ A = 400\\ mA$.\n\nIf L1 is OFF (or F1 is blown), the current is 0 mA. Given the prompt asks for the current when L1 is ON:\n\nANSWER: 400 mA",
+      "normalized_prediction": "400 mA",
+      "correct": false,
+      "latency_ms": 5011.19,
+      "invariance_partner_id": "task_0013_whole__inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0013_whole__inv",
+      "family": "whole_system",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "0 mA",
+      "raw_response": "To find the current, we must first determine the conditions under which L1 is ON and the resulting circuit configuration.\n\n1.  **Analyze the Logic:**\n    *   **U1 is a NOR gate.** Its output is HIGH (1) only if both SW1 and SW2 are LOW (0). If either SW1 or SW2 is closed, U1 output is LOW (0).\n    *   **U2 is an AND gate.** Its output is HIGH (1) only if both the U1 output is HIGH (1) and SW3 is closed (HIGH).\n    *   **L1 is ON** if the output of U2 is HIGH. For U2 to be HIGH, U1 must be HIGH (SW1 and SW2 open) and SW3 must be closed.\n    *   If these conditions are met, the 12V VCC powers the load resistor bank (R1 and R2).\n\n2.  **Calculate the Load Resistance:**\n    *   The resistors R1 (120 Ohm) and R2 (40 Ohm) are connected in parallel.\n    *   The formula for parallel resistance is: $1/R_{total} = 1/R1 + 1/R2$.\n    *   $1/R_{total} = 1/120 + 1/40 = 1/120 + 3/120 = 4/120$.\n    *   $R_{total} = 120 / 4 = 30$ Ohms.\n\n3.  **Calculate the Current:**\n    *   Using Ohm's Law ($I = V / R$):\n    *   $V = 12V$\n    *   $R = 30$ Ohms\n    *   $I = 12 / 30 = 0.4$ Amperes.\n    *   Convert to milliamperes: $0.4 \\times 1000 = 400$ mA.\n\nGiven the rule \"When L1=ON... 12V VCC powers R-bank to 0V\", and having established the logic requirements for L1 to be ON, the current flowing through the resistor bank is 400 mA.\n\nANSWER: 400 mA",
+      "normalized_prediction": "400 mA",
+      "correct": false,
+      "latency_ms": 5845.87,
+      "invariance_partner_id": "task_0012_whole__eas",
+      "error": null
+    }
+  ],
+  "records": [
+    {
+      "task_id": "task_0000_state__eas",
+      "family": "state_propagation",
+      "difficulty": "easy",
+      "theme": "ieee_classic",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "ON",
+      "raw_response": "To determine the state of indicator LED L1, we analyze the circuit logic:\n\n1.  **Inputs**: The circuit is powered by a 5V source (VCC).\n2.  **Top Branch (SW1 and F1)**: SW1 is closed and F1 (a fuse) is intact, meaning the top input of the NAND gate (U1) receives a HIGH signal (Logic 1).\n3.  **Bottom Branch (SW2)**: SW2 is an open switch. Therefore, the bottom input of the NAND gate (U1) is disconnected from the 5V source. In typical logic circuit diagrams of this type, an unconnected/floating input to a gate is effectively a LOW signal (Logic 0).\n4.  **NAND Gate (U1)**: A NAND gate outputs HIGH (1) if at least one input is LOW (0). Since the inputs are (1, 0), the output is 1 (HIGH).\n5.  **Indicator (L1)**: With the NAND gate outputting a HIGH signal, the indicator L1 receives power and illuminates.\n\nANSWER: ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 2243.69,
+      "invariance_partner_id": "task_0001_state__inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0001_state__inv",
+      "family": "state_propagation",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "ON",
+      "raw_response": "To determine the state of indicator LED L1, let's analyze the circuit:\n\n1.  **VCC (5V power source):** Provides power to the circuit.\n2.  **SW1 (Switch 1):** In the image, the circuit symbol for SW1 appears to be closed (a continuous line).\n3.  **F1 (Fuse):** This component is in series with SW1 and is intact, allowing current to flow to the top input of the logic gate.\n4.  **SW2 (Switch 2):** In the image, the circuit symbol for SW2 is clearly open (the line is disconnected).\n5.  **U1 (NAND gate):** A NAND gate produces a \"LOW\" (OFF) output only if both inputs are \"HIGH\" (ON). If either input is \"LOW\", the output is \"HIGH\" (ON).\n    *   Top input: Connected to VCC via SW1 and F1, so it is \"HIGH\" (1).\n    *   Bottom input: Connected to VCC via SW2. Because SW2 is open, this input is floating or pulled \"LOW\" (0).\n6.  **Logic Calculation:** For a NAND gate, 1 NAND 0 = 1 (HIGH).\n7.  **L1:** The output of the NAND gate is HIGH, meaning voltage is supplied to the indicator LED, turning it on.\n\nANSWER: ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 5654.55,
+      "invariance_partner_id": "task_0000_state__eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0002_bridge_eas",
+      "family": "bridge_vs_junction",
+      "difficulty": "easy",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1, L2",
+      "raw_response": "To determine which indicator lamps receive 5V power, we trace the connections from the 5V bus (BUS1) down to the lamps (L1, L2):\n\n1.  **Analyze the Connections from BUS1 (5V):**\n    *   There is a solid junction dot connecting the vertical wire to BUS1 at column 2. This wire descends to switch SW1.\n    *   There is another solid junction dot connecting the vertical wire to BUS1 at column 3. This wire descends to switch SW2.\n    *   The horizontal wire for BUS2 (0V) has \"bridge jumps\" (the small curves) where the vertical wires from BUS1 cross it. These bridge jumps indicate that the vertical wires **do not** connect to BUS2, so there is no short circuit.\n\n2.  **Trace the path to L1:**\n    *   The vertical wire from BUS1 (at column 2) goes through switch SW1 and continues to lamp L1. Since the switch is a component in the circuit, if it is closed, L1 will receive 5V.\n\n3.  **Trace the path to L2:**\n    *   The vertical wire from BUS1 (at column 3) goes through switch SW2 and continues to lamp L2. Since the switch is a component in the circuit, if it is closed, L2 will receive 5V.\n\nBoth paths are identical in their structure and independent of one another. Assuming the switches are closed, both lamps are connected to the 5V source and grounded at the other terminal.\n\nANSWER: L1, L2",
+      "normalized_prediction": "L1, L2",
+      "correct": true,
+      "latency_ms": 3363.07,
+      "invariance_partner_id": "task_0003_bridge_inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0003_bridge_inv",
+      "family": "bridge_vs_junction",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1, L2",
+      "raw_response": "To determine which indicator lamps receive 5V power, we trace the connections from the 5V BUS1:\n\n1.  **Connection Analysis**:\n    *   The 5V source is located at BUS1.\n    *   There are two vertical lines originating from BUS1. \n    *   At the intersection with the 5V line, both vertical lines have a solid orange dot, indicating a **physical electrical junction** (connection).\n    *   These vertical lines cross the 0V BUS2 line using a \"curved bridge\" symbol, which indicates that they are **not connected** to BUS2.\n    *   The current flows down both vertical lines to the switches (SW1 and SW2).\n\n2.  **Path Tracing**:\n    *   **Path 1**: The first vertical line connects BUS1 to SW1. When SW1 is closed (as shown in the schematic), current flows through SW1 to L1, and then to ground. Thus, L1 receives power.\n    *   **Path 2**: The second vertical line connects BUS1 to SW2. When SW2 is closed (as shown in the schematic), current flows through SW2 to L2, and then to ground. Thus, L2 receives power.\n\n3.  **Conclusion**:\n    Both switches are depicted in a closed state, bridging the 5V path to the respective lamps. Since both paths are correctly connected to the 5V bus and isolated from the 0V bus, both lamps are powered.\n\nANSWER: L1, L2",
+      "normalized_prediction": "L1, L2",
+      "correct": true,
+      "latency_ms": 4384.93,
+      "invariance_partner_id": "task_0002_bridge_eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0004_equiva_eas",
+      "family": "equivalent_resistance",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "clean",
+      "label_mode": "annotated",
+      "ground_truth": "35 Ohm",
+      "raw_response": "To calculate the equivalent resistance between Terminal A and Terminal B, we analyze the circuit as follows:\n\n1.  **Identify the circuit structure:**\n    *   There is a resistor $R_1$ (15 Ohm) connected in series with a parallel combination of $R_2$ (60 Ohm) and $R_3$ (30 Ohm).\n\n2.  **Calculate the equivalent resistance of the parallel branch ($R_p$):**\n    The formula for two resistors in parallel is:\n    $$\\frac{1}{R_p} = \\frac{1}{R_2} + \\frac{1}{R_3}$$\n    $$\\frac{1}{R_p} = \\frac{1}{60} + \\frac{1}{30}$$\n    To add these, use a common denominator of 60:\n    $$\\frac{1}{R_p} = \\frac{1}{60} + \\frac{2}{60} = \\frac{3}{60}$$\n    $$R_p = \\frac{60}{3} = 20 \\text{ Ohm}$$\n\n3.  **Calculate the total equivalent resistance ($R_{total}$):**\n    Since $R_1$ is in series with the parallel combination ($R_p$), we add them together:\n    $$R_{total} = R_1 + R_p$$\n    $$R_{total} = 15 \\text{ Ohm} + 20 \\text{ Ohm} = 35 \\text{ Ohm}$$\n\nANSWER: 35 Ohm",
+      "normalized_prediction": "35 Ohm",
+      "correct": true,
+      "latency_ms": 3212.13,
+      "invariance_partner_id": "task_0005_equiva_inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0005_equiva_inv",
+      "family": "equivalent_resistance",
+      "difficulty": "easy",
+      "theme": "aged_paper",
+      "degradation": "mobile_photo",
+      "label_mode": "annotated",
+      "ground_truth": "35 Ohm",
+      "raw_response": "To calculate the equivalent resistance between Terminal A and Terminal B, we analyze the circuit structure.\n\n1.  **Identify the parallel section:** Resistors $R_2$ ($60\\text{ Ohm}$) and $R_3$ ($30\\text{ Ohm}$) are connected in parallel. The equivalent resistance ($R_{p}$) of these two resistors is calculated using the formula:\n    $$\\frac{1}{R_p} = \\frac{1}{R_2} + \\frac{1}{R_3}$$\n    $$\\frac{1}{R_p} = \\frac{1}{60} + \\frac{1}{30}$$\n    To add these, use a common denominator of 60:\n    $$\\frac{1}{R_p} = \\frac{1}{60} + \\frac{2}{60} = \\frac{3}{60}$$\n    $$R_p = \\frac{60}{3} = 20\\text{ Ohm}$$\n\n2.  **Combine with the series resistor:** The resistor $R_1$ ($15\\text{ Ohm}$) is in series with the parallel combination ($R_p$). The total equivalent resistance ($R_{eq}$) is the sum of these values:\n    $$R_{eq} = R_1 + R_p$$\n    $$R_{eq} = 15\\text{ Ohm} + 20\\text{ Ohm} = 35\\text{ Ohm}$$\n\nThere are no switches in the provided diagram, so we assume all branches are connected.\n\nANSWER: 35 Ohm",
+      "normalized_prediction": "35 Ohm",
+      "correct": true,
+      "latency_ms": 11174.27,
+      "invariance_partner_id": "task_0004_equiva_eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0006_fault__eas",
+      "family": "fault_diagnosis",
+      "difficulty": "easy",
+      "theme": "ieee_classic",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "A",
+      "raw_response": "To determine which fault explains the observations, let's analyze the circuit:\n\n1.  **Circuit State:**\n    *   **TP1 = 5V (HIGH):** This indicates that VCC1 is active and F1 is intact.\n    *   **Inputs to U1 (NAND gate):** The top input is connected to the 5V line (via SW1), and the bottom input is connected to the VCC2 line (0V via SW2).\n    *   **Inputs to U2 (XOR gate):** One input is the output of U1, and the other is the VCC2 line (0V).\n\n2.  **Expected Behavior without faults:**\n    *   U1 inputs are 1 (HIGH) and 0 (LOW). A NAND gate (1 NAND 0) should output **1 (HIGH)**.\n    *   U2 inputs are the output of U1 (1) and VCC2 (0). An XOR gate (1 XOR 0) should output **1 (HIGH)**.\n    *   Therefore, TP2 should be HIGH, and TP3 should be HIGH (lighting L1).\n\n3.  **Observed Behavior:**\n    *   TP2 is **LOW (0V)**.\n    *   TP3 is **LOW (0V)**.\n\n4.  **Evaluating Candidate Faults:**\n    *   **A: Gate U1 output stuck LOW:** If the output of U1 is forced LOW, then TP2 = 0V. Since U2 receives 0 (from U1) and 0 (from VCC2), 0 XOR 0 = 0. This results in TP3 = 0V. This matches all observations.\n    *   **B: Gate U1 output stuck HIGH:** This would make TP2 HIGH, which contradicts the observation.\n    *   **C: Gate U2 output stuck LOW:** This would make TP3 LOW. However, if U2 were functioning correctly, the inputs are (U1 output, 0). If U1 is working correctly, it outputs 1, and 1 XOR 0 = 1. If U2 were stuck LOW, TP2 would still be 1 (HIGH). The observation shows TP2 is LOW, so this fault cannot be the sole cause of TP2 being LOW.\n    *   **D: Fuse F1 blown open:** If F1 were blown, TP1 would be 0V (or floating), not 5V.\n\nFault A is the only one that explains why TP2 is LOW (direct fault) and consequently why TP3 is LOW (via the XOR gate logic).\n\nANSWER: A",
+      "normalized_prediction": "A",
+      "correct": true,
+      "latency_ms": 18603.27,
+      "invariance_partner_id": "task_0007_fault__inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0007_fault__inv",
+      "family": "fault_diagnosis",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "A",
+      "raw_response": "To determine the correct fault, let's analyze the circuit based on the provided probe readings:\n\n1.  **Analyze Inputs to Gates:**\n    *   **TP1 = 5V (HIGH):** This means the top input to the NAND gate (U1) is HIGH.\n    *   **VCC2 = 0V (LOW):** This is connected to the bottom input of U1 and the bottom input of the XOR gate (U2). Since SW2 is closed, both of these inputs are at 0V (LOW).\n\n2.  **Evaluate Expected Logic:**\n    *   **U1 (NAND gate):** Inputs are 5V (HIGH) and 0V (LOW). A NAND gate with inputs (H, L) produces a HIGH output.\n        *   Expected output at TP2 = HIGH (5V).\n        *   **Actual reading at TP2 = 0V (LOW).** This indicates a fault at U1.\n    *   **U2 (XOR gate):** Inputs are TP2 and the bottom rail (0V).\n        *   If the circuit were working correctly, the inputs would be (HIGH, LOW), and an XOR gate (H, L) outputs HIGH.\n        *   **Actual reading at TP3 = 0V (LOW).** Since TP2 is LOW and the bottom input is LOW, the XOR gate (L, L) produces a LOW output, which is consistent with the output TP3 being 0V.\n\n3.  **Evaluate Candidate Faults:**\n    *   **A: Gate U1 output stuck LOW:** If U1 is stuck LOW, TP2 will be 0V regardless of inputs. This matches the reading at TP2. Since U2 now has inputs (L, L), its output is L, matching TP3. This is consistent.\n    *   **B: Gate U1 output stuck HIGH:** If U1 were stuck HIGH, TP2 would be HIGH. This contradicts the observed TP2 = 0V.\n    *   **C: Gate U2 output stuck LOW:** If U2 were stuck LOW, TP3 would be 0V. However, if U2 were working normally, with U1 stuck LOW, the inputs to U2 would be (L, L), which would naturally result in TP3 = 0V. While this *could* technically result in 0V, fault A is the primary failure explaining why the U1 output is LOW when it should be HIGH.\n    *   **D: Fuse F1 blown open:** If F1 were open, TP1 would be 0V (or floating), contradicting the observed TP1 = 5V.\n\nConclusion: Fault A explains why U1 is producing a LOW output despite receiving inputs that should trigger a HIGH output, which then cascades to produce a LOW at TP3.\n\nANSWER: A",
+      "normalized_prediction": "A",
+      "correct": true,
+      "latency_ms": 6050.88,
+      "invariance_partner_id": "task_0006_fault__eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0008_counte_eas",
+      "family": "counterfactual_pair",
+      "difficulty": "easy",
+      "theme": "ieee_classic",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "YES",
+      "raw_response": "In Panel A, the circuit uses an OR gate. The light L1 will be ON if either SW1 or SW2 (or both) is closed.\n\nIn Panel B, the circuit uses a NOR gate. The light L1 will be ON only if both SW1 and SW2 are open.\n\nBecause the conditions under which L1 is illuminated differ between the two panels, the final state of the LED changes for the various possible positions of the switches.\n\nANSWER: YES",
+      "normalized_prediction": "YES",
+      "correct": true,
+      "latency_ms": 3586.46,
+      "invariance_partner_id": "task_0009_counte_inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0009_counte_inv",
+      "family": "counterfactual_pair",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "YES",
+      "raw_response": "To determine if the final state of LED L1 changes between the two circuits, let's analyze their logic:\n\n**Panel A (Baseline Circuit):**\n*   The circuit uses an **OR** gate.\n*   The output is high (LED L1 is ON) if either SW1 **OR** SW2 is closed.\n*   The output is low (LED L1 is OFF) only if both SW1 and SW2 are open.\n\n**Panel B (Revised Circuit):**\n*   The circuit uses a **NOR** gate.\n*   The output is low (LED L1 is OFF) if either SW1 **OR** SW2 is closed.\n*   The output is high (LED L1 is ON) only if both SW1 and SW2 are open.\n\nBecause the logic gates are different (OR vs. NOR), the resulting state of L1 for any given configuration of switches (SW1, SW2) will be the inverse of the state in Panel A. Therefore, the state of the LED changes.\n\nANSWER: YES",
+      "normalized_prediction": "YES",
+      "correct": true,
+      "latency_ms": 14536.08,
+      "invariance_partner_id": "task_0008_counte_eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0010_compon_eas",
+      "family": "component_audit",
+      "difficulty": "easy",
+      "theme": "high_contrast_mono",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "0",
+      "raw_response": "To determine the number of inverting gates, let's examine the logic gate symbols present in the schematic:\n\n1.  **U1**: This symbol is a standard AND gate shape (curved input side, flat output side) without an inversion bubble (a small circle) at the output. Therefore, it is a non-inverting gate.\n2.  **U2**: Similarly, this symbol is an AND gate shape without an inversion bubble at the output. Therefore, it is also a non-inverting gate.\n\nSince there are no NOT, NAND, or NOR gates (which are defined by having an output inversion bubble) present in the diagram, the total count is 0.\n\nANSWER: 0",
+      "normalized_prediction": "0",
+      "correct": true,
+      "latency_ms": 2509.68,
+      "invariance_partner_id": "task_0011_compon_inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0011_compon_inv",
+      "family": "component_audit",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "0",
+      "raw_response": "To determine the number of inverting gates, let's examine the logic gates labeled U1 and U2 in the provided schematic:\n\n1.  **U1**: This is an AND gate symbol. It does not have an inversion bubble on its output.\n2.  **U2**: This is also an AND gate symbol. It does not have an inversion bubble on its output.\n\nSince neither gate has an output inversion bubble (the small circle typically denoting NOT, NAND, or NOR logic), there are no inverting gates present in the schematic.\n\nANSWER: 0",
+      "normalized_prediction": "0",
+      "correct": true,
+      "latency_ms": 4069.2,
+      "invariance_partner_id": "task_0010_compon_eas",
+      "error": null
+    },
+    {
+      "task_id": "task_0012_whole__eas",
+      "family": "whole_system",
+      "difficulty": "easy",
+      "theme": "ieee_classic",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "0 mA",
+      "raw_response": "To find the current, we must first determine the state of the circuit based on the logic gates U1 and U2.\n\n1.  **Analyze U1 (NOR Gate):**\n    *   U1 is a NOR gate. Its output is HIGH (1) only if both inputs (from SW1 and SW2) are LOW (0).\n    *   If SW1 or SW2 is closed (connected to VCC), the input to U1 is HIGH.\n    *   The output of U1 drives **L1**. Thus, L1 is ON only if SW1=OFF and SW2=OFF.\n\n2.  **Analyze U2 (AND Gate) and the Load Driver Rule:**\n    *   U2 is an AND gate. Its output is HIGH only if both inputs are HIGH.\n    *   The inputs to U2 are:\n        *   The output of U1 (which is the signal for L1).\n        *   The state of SW3.\n    *   The \"Load Driver Rule\" states: \"When L1=ON (U2=HIGH & F1 intact), 12V VCC powers R-bank to 0V\".\n    *   Wait, let's re-examine the logic:\n        *   For L1 to be ON, U1 must output HIGH (SW1=OFF, SW2=OFF).\n        *   The \"Load Driver Rule\" says current flows to the R-bank when L1=ON and U2=HIGH.\n        *   If L1 is ON, U1 output is HIGH. For U2 to be HIGH, the other input (SW3) must also be closed (connected to VCC).\n        *   Therefore, the load bank is powered only when **SW1=OFF, SW2=OFF, and SW3=ON**.\n\n3.  **Calculate Current (R-bank):**\n    *   When the conditions are met, the R-bank (R1 and R2 in parallel) is connected to 12V.\n    *   $R1 = 120\\ \\Omega$, $R2 = 40\\ \\Omega$.\n    *   Equivalent resistance $R_p = \\frac{R1 \\cdot R2}{R1 + R2} = \\frac{120 \\cdot 40}{120 + 40} = \\frac{4800}{160} = 30\\ \\Omega$.\n    *   Using Ohm's Law ($I = V / R$):\n    *   $I = 12V / 30\\ \\Omega = 0.4\\ A$.\n    *   Convert to mA: $0.4\\ A = 400\\ mA$.\n\nIf L1 is OFF (or F1 is blown), the current is 0 mA. Given the prompt asks for the current when L1 is ON:\n\nANSWER: 400 mA",
+      "normalized_prediction": "400 mA",
+      "correct": false,
+      "latency_ms": 5011.19,
+      "invariance_partner_id": "task_0013_whole__inv",
+      "error": null
+    },
+    {
+      "task_id": "task_0013_whole__inv",
+      "family": "whole_system",
+      "difficulty": "easy",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "0 mA",
+      "raw_response": "To find the current, we must first determine the conditions under which L1 is ON and the resulting circuit configuration.\n\n1.  **Analyze the Logic:**\n    *   **U1 is a NOR gate.** Its output is HIGH (1) only if both SW1 and SW2 are LOW (0). If either SW1 or SW2 is closed, U1 output is LOW (0).\n    *   **U2 is an AND gate.** Its output is HIGH (1) only if both the U1 output is HIGH (1) and SW3 is closed (HIGH).\n    *   **L1 is ON** if the output of U2 is HIGH. For U2 to be HIGH, U1 must be HIGH (SW1 and SW2 open) and SW3 must be closed.\n    *   If these conditions are met, the 12V VCC powers the load resistor bank (R1 and R2).\n\n2.  **Calculate the Load Resistance:**\n    *   The resistors R1 (120 Ohm) and R2 (40 Ohm) are connected in parallel.\n    *   The formula for parallel resistance is: $1/R_{total} = 1/R1 + 1/R2$.\n    *   $1/R_{total} = 1/120 + 1/40 = 1/120 + 3/120 = 4/120$.\n    *   $R_{total} = 120 / 4 = 30$ Ohms.\n\n3.  **Calculate the Current:**\n    *   Using Ohm's Law ($I = V / R$):\n    *   $V = 12V$\n    *   $R = 30$ Ohms\n    *   $I = 12 / 30 = 0.4$ Amperes.\n    *   Convert to milliamperes: $0.4 \\times 1000 = 400$ mA.\n\nGiven the rule \"When L1=ON... 12V VCC powers R-bank to 0V\", and having established the logic requirements for L1 to be ON, the current flowing through the resistor bank is 400 mA.\n\nANSWER: 400 mA",
+      "normalized_prediction": "400 mA",
+      "correct": false,
+      "latency_ms": 5845.87,
+      "invariance_partner_id": "task_0012_whole__eas",
+      "error": null
+    }
+  ]
+}

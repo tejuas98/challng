@@ -1,0 +1,60 @@
+=== SCHEMFORGE AUTOMATED VALIDATION & MUTATION LOG ===
+
+$ pytest -v
+============================= test session starts ==============================
+platform darwin -- Python 3.14.3, pytest-9.2.0, pluggy-1.7.0 -- /Users/toru/Projects/schemforge/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/toru/Projects/schemforge
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 11 items
+
+tests/test_schemforge.py::test_deterministic_seed_reproducibility PASSED [  9%]
+tests/test_schemforge.py::test_all_task_families_generate_render_and_validate PASSED [ 18%]
+tests/test_schemforge.py::test_exact_resistance_series_parallel_solver PASSED [ 27%]
+tests/test_schemforge.py::test_invariance_transforms_preserve_ground_truth PASSED [ 36%]
+tests/test_schemforge.py::test_answer_normalizer_handles_real_vlm_formats PASSED [ 45%]
+tests/test_schemforge.py::test_whole_system_multi_domain_variants PASSED [ 54%]
+tests/test_schemforge.py::test_full_mutation_kill_suite_passes_100_percent PASSED [ 63%]
+tests/test_schemforge.py::test_end_to_end_pipeline_validation_and_baselines PASSED [ 72%]
+tests/test_schemforge.py::test_custom_netlist_compiler_and_exporters PASSED [ 81%]
+tests/test_schemforge.py::test_production_fastapi_endpoints PASSED       [ 90%]
+tests/test_schemforge.py::test_custom_dsl_and_scalable_lazy_1000_batch PASSED [100%]
+
+============================= 11 passed in 43.96s ==============================
+
+$ schemforge mutate-test --out artifacts/mutation_report.json
+Mutation Suite: 12/12 mutants killed (100.0%).
+
+$ schemforge validate --dataset artifacts/sample_dataset/dataset.jsonl --out artifacts/validation_report.json
+{
+  "total_tasks": 70,
+  "passed_tasks": 70,
+  "pass_rate": 1.0,
+  "failed_ids": [],
+  "family_distribution": {
+    "state_propagation": 10,
+    "bridge_vs_junction": 10,
+    "equivalent_resistance": 10,
+    "fault_diagnosis": 10,
+    "counterfactual_pair": 10,
+    "component_audit": 10,
+    "whole_system": 10
+  },
+  "blind_majority_ceiling_by_family": {
+    "state_propagation": 0.7,
+    "bridge_vs_junction": 0.3,
+    "equivalent_resistance": 0.2,
+    "fault_diagnosis": 0.4,
+    "counterfactual_pair": 0.4,
+    "component_audit": 0.3,
+    "whole_system": 0.4
+  },
+  "mean_contrast_ratio": 8.32,
+  "mean_ocr_token_recall": 0.633,
+  "invariance_pairs_checked": 14,
+  "invariance_pairs_consistent": 14,
+  "counterfactual_pairs_checked": 0,
+  "counterfactual_pairs_valid": 0
+}

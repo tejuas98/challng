@@ -1,0 +1,19 @@
+{
+  "total_tasks": 21,
+  "requested_count": 21,
+  "unique_signatures": 21,
+  "capped_at_unique_limit": false,
+  "base_seed": 202,
+  "dataset_jsonl": "dataset.jsonl",
+  "lazy_render": false,
+  "materialized_images": 21,
+  "families": [
+    "bridge_vs_junction",
+    "component_audit",
+    "counterfactual_pair",
+    "equivalent_resistance",
+    "fault_diagnosis",
+    "state_propagation",
+    "whole_system"
+  ]
+}

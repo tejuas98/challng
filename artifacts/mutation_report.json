@@ -1,0 +1,79 @@
+{
+  "total_mutants": 12,
+  "mutants_killed": 12,
+  "mutation_score": 1.0,
+  "results": [
+    {
+      "mutant_id": "M01_DROP_NAND_BUBBLE",
+      "description": "Mutant ignores IEEE inversion bubble on NAND gates",
+      "killed": true,
+      "evidence": "NAND(1,1)->OFF vs dropped-bubble AND mutant(1,1)->ON"
+    },
+    {
+      "mutant_id": "M02_IGNORE_OPEN_SWITCH",
+      "description": "Mutant conducts current through OPEN switches",
+      "killed": true,
+      "evidence": "Switch force-closed mutant diverged from netlist baseline state"
+    },
+    {
+      "mutant_id": "M03_IGNORE_BLOWN_FUSE",
+      "description": "Mutant conducts current across blown fuse gaps",
+      "killed": true,
+      "evidence": "Blown fuse isolation differential verified"
+    },
+    {
+      "mutant_id": "M04_SHORT_BRIDGE_JUMP",
+      "description": "Mutant shorts isolated bridge wire crossings as junctions",
+      "killed": true,
+      "evidence": "Bridge short-circuit mutant altered lamp reachability: {'L1': True, 'L2': False, 'L3': False} -> {'L1': True, 'L2': True, 'L3': True}"
+    },
+    {
+      "mutant_id": "M05_PARALLEL_AS_SERIES",
+      "description": "Mutant sums parallel resistors instead of reciprocal sum",
+      "killed": true,
+      "evidence": "Exact solver gives 30 Ohm, naive sum mutant gives 120 Ohm"
+    },
+    {
+      "mutant_id": "M06_LEAK_OPEN_BRANCH_RES",
+      "description": "Mutant includes disconnected parallel resistor branches",
+      "killed": true,
+      "evidence": "Open branch ignored correctly (60 Ohm != mutant 30 Ohm)"
+    },
+    {
+      "mutant_id": "M07_AMBIGUOUS_FAULT_DIAG",
+      "description": "Mutant injects duplicate matching fault hypothesis",
+      "killed": true,
+      "evidence": "Validator cleanly raised ambiguity error: Fault diagnosis ambiguity error: expected exactly 1 matching fault, got 2"
+    },
+    {
+      "mutant_id": "M08_OVERLAPPING_LABELS",
+      "description": "Mutant overlaps SW1 and U1 bounding boxes",
+      "killed": true,
+      "evidence": "Collision guard detected overlapping label bboxes: [('lbl:SW1', 'lbl:U1')]"
+    },
+    {
+      "mutant_id": "M09_OUT_OF_BOUNDS_LABEL",
+      "description": "Mutant clips rendered component label outside canvas",
+      "killed": true,
+      "evidence": "Out-of-bounds label rejected by margin guard: [('lbl:L1', 'OUT_OF_BOUNDS')]"
+    },
+    {
+      "mutant_id": "M10_COUNTERFACTUAL_COLLAPSE",
+      "description": "Mutant collapses counterfactual change detector",
+      "killed": true,
+      "evidence": "Counterfactual solver separates causal change (OFF -> OFF) vs invariant control (NO)"
+    },
+    {
+      "mutant_id": "M11_WHOLE_SYSTEM_LOGIC_OHM_COUPLING",
+      "description": "Mutant decouples fuse/logic interlock from load bank current",
+      "killed": true,
+      "evidence": "Whole-system logic-to-Ohm coupling caught blown F1: 200 mA (enabled) -> 0 mA (disabled)"
+    },
+    {
+      "mutant_id": "M12_SWITCH_TOGGLE_WHATIF",
+      "description": "Mutant ignores hypothetical switch toggle in single-sheet reasoning",
+      "killed": true,
+      "evidence": "What-if toggle perturbation on SW1 detected: base=ON -> toggled=OFF"
+    }
+  ]
+}

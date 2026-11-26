@@ -1,0 +1,309 @@
+{
+  "model_label": "oracle_solver",
+  "provider": "oracle_solver",
+  "total_tasks": 14,
+  "valid_calls": 14,
+  "error_count": 0,
+  "overall_accuracy": 1.0,
+  "valid_only_accuracy": 1.0,
+  "mean_latency_ms": 0.0,
+  "by_family": {
+    "bridge_vs_junction": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "component_audit": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "counterfactual_pair": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "equivalent_resistance": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "fault_diagnosis": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "state_propagation": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "whole_system": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    }
+  },
+  "by_difficulty": {
+    "hard": {
+      "total": 7,
+      "correct": 7,
+      "accuracy": 1.0
+    },
+    "medium": {
+      "total": 7,
+      "correct": 7,
+      "accuracy": 1.0
+    }
+  },
+  "by_degradation": {
+    "clean": {
+      "total": 6,
+      "correct": 6,
+      "accuracy": 1.0
+    },
+    "low_contrast_fax": {
+      "total": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "mobile_photo": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "office_scan": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    }
+  },
+  "by_label_mode": {
+    "annotated": {
+      "total": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "symbol_only": {
+      "total": 10,
+      "correct": 10,
+      "accuracy": 1.0
+    }
+  },
+  "invariance_pairs_evaluated": 0,
+  "invariance_both_correct": 0,
+  "invariance_prediction_agreement": null,
+  "sample_failures": [],
+  "records": [
+    {
+      "task_id": "task_0014_state__med",
+      "family": "state_propagation",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "OFF",
+      "raw_response": "OFF",
+      "normalized_prediction": "OFF",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0015_bridge_med",
+      "family": "bridge_vs_junction",
+      "difficulty": "medium",
+      "theme": "ieee_classic",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "L2, L3",
+      "raw_response": "L2, L3",
+      "normalized_prediction": "L2, L3",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0016_equiva_med",
+      "family": "equivalent_resistance",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "120 mA",
+      "raw_response": "120 mA",
+      "normalized_prediction": "120 mA",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0017_fault__med",
+      "family": "fault_diagnosis",
+      "difficulty": "medium",
+      "theme": "high_contrast_mono",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "D",
+      "raw_response": "D",
+      "normalized_prediction": "D",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0018_counte_med",
+      "family": "counterfactual_pair",
+      "difficulty": "medium",
+      "theme": "high_contrast_mono",
+      "degradation": "low_contrast_fax",
+      "label_mode": "annotated",
+      "ground_truth": "ON -> ON",
+      "raw_response": "ON -> ON",
+      "normalized_prediction": "ON -> ON",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0019_compon_med",
+      "family": "component_audit",
+      "difficulty": "medium",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "1",
+      "raw_response": "1",
+      "normalized_prediction": "1",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0020_whole__med",
+      "family": "whole_system",
+      "difficulty": "medium",
+      "theme": "kicad_blueprint",
+      "degradation": "mobile_photo",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1=ON, L2=ON",
+      "raw_response": "L1=ON, L2=ON",
+      "normalized_prediction": "L1=ON, L2=ON",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0021_state__har",
+      "family": "state_propagation",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "office_scan",
+      "label_mode": "annotated",
+      "ground_truth": "ON",
+      "raw_response": "ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0022_bridge_har",
+      "family": "bridge_vs_junction",
+      "difficulty": "hard",
+      "theme": "kicad_blueprint",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "L1, L2",
+      "raw_response": "L1, L2",
+      "normalized_prediction": "L1, L2",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0023_equiva_har",
+      "family": "equivalent_resistance",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "symbol_only",
+      "ground_truth": "55.81 mA",
+      "raw_response": "55.81 mA",
+      "normalized_prediction": "55.81 mA",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0024_fault__har",
+      "family": "fault_diagnosis",
+      "difficulty": "hard",
+      "theme": "ieee_classic",
+      "degradation": "mobile_photo",
+      "label_mode": "annotated",
+      "ground_truth": "C",
+      "raw_response": "C",
+      "normalized_prediction": "C",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0025_counte_har",
+      "family": "counterfactual_pair",
+      "difficulty": "hard",
+      "theme": "ieee_classic",
+      "degradation": "office_scan",
+      "label_mode": "symbol_only",
+      "ground_truth": "OFF -> ON",
+      "raw_response": "OFF -> ON",
+      "normalized_prediction": "OFF -> ON",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0026_compon_har",
+      "family": "component_audit",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "low_contrast_fax",
+      "label_mode": "symbol_only",
+      "ground_truth": "1",
+      "raw_response": "1",
+      "normalized_prediction": "1",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    },
+    {
+      "task_id": "task_0027_whole__har",
+      "family": "whole_system",
+      "difficulty": "hard",
+      "theme": "aged_paper",
+      "degradation": "clean",
+      "label_mode": "annotated",
+      "ground_truth": "ON",
+      "raw_response": "ON",
+      "normalized_prediction": "ON",
+      "correct": true,
+      "latency_ms": 0.0,
+      "invariance_partner_id": null,
+      "error": null
+    }
+  ]
+}

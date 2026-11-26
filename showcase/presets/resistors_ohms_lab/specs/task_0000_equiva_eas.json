@@ -1,0 +1,468 @@
+{
+  "canvas_width": 1280,
+  "canvas_height": 800,
+  "drawing_title": "SERIES-PARALLEL RESISTANCE NETWORK",
+  "drawing_number": "SF-RES-505003",
+  "revision": "A",
+  "rule_banner": null,
+  "label_mode": "annotated",
+  "components": [
+    {
+      "id": "TERM_A",
+      "kind": "test_point",
+      "center": {
+        "x": 85.0,
+        "y": 340.0
+      },
+      "orientation": 0,
+      "ports": {
+        "out": {
+          "x": 105.0,
+          "y": 340.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "A",
+      "display_tag": null
+    },
+    {
+      "id": "TERM_B",
+      "kind": "test_point",
+      "center": {
+        "x": 1150.0,
+        "y": 340.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 1130.0,
+          "y": 340.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "B",
+      "display_tag": null
+    },
+    {
+      "id": "R1",
+      "kind": "resistor",
+      "center": {
+        "x": 290.0,
+        "y": 340.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 256.0,
+          "y": 340.0
+        },
+        "p1": {
+          "x": 256.0,
+          "y": 340.0
+        },
+        "out": {
+          "x": 324.0,
+          "y": 340.0
+        },
+        "p2": {
+          "x": 324.0,
+          "y": 340.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": 50,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "50 Ohm",
+      "display_tag": null
+    },
+    {
+      "id": "R2",
+      "kind": "resistor",
+      "center": {
+        "x": 660.0,
+        "y": 225.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 626.0,
+          "y": 225.0
+        },
+        "p1": {
+          "x": 626.0,
+          "y": 225.0
+        },
+        "out": {
+          "x": 694.0,
+          "y": 225.0
+        },
+        "p2": {
+          "x": 694.0,
+          "y": 225.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": 120,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "120 Ohm",
+      "display_tag": null
+    },
+    {
+      "id": "R3",
+      "kind": "resistor",
+      "center": {
+        "x": 660.0,
+        "y": 455.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 626.0,
+          "y": 455.0
+        },
+        "p1": {
+          "x": 626.0,
+          "y": 455.0
+        },
+        "out": {
+          "x": 694.0,
+          "y": 455.0
+        },
+        "p2": {
+          "x": 694.0,
+          "y": 455.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": 60,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "60 Ohm",
+      "display_tag": null
+    }
+  ],
+  "nets": [
+    {
+      "net_id": "NR_0",
+      "points": [
+        {
+          "x": 105.0,
+          "y": 340.0
+        },
+        {
+          "x": 256.0,
+          "y": 340.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NR_0",
+          "p1": {
+            "x": 105.0,
+            "y": 340.0
+          },
+          "p2": {
+            "x": 256.0,
+            "y": 340.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NP_IN_1",
+      "points": [
+        {
+          "x": 324.0,
+          "y": 340.0
+        },
+        {
+          "x": 535.0,
+          "y": 340.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NP_IN_1",
+          "p1": {
+            "x": 324.0,
+            "y": 340.0
+          },
+          "p2": {
+            "x": 535.0,
+            "y": 340.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NT_1_1",
+      "points": [
+        {
+          "x": 535.0,
+          "y": 340.0
+        },
+        {
+          "x": 535.0,
+          "y": 225.0
+        },
+        {
+          "x": 626.0,
+          "y": 225.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NT_1_1",
+          "p1": {
+            "x": 535.0,
+            "y": 340.0
+          },
+          "p2": {
+            "x": 535.0,
+            "y": 225.0
+          }
+        },
+        {
+          "net_id": "NT_1_1",
+          "p1": {
+            "x": 535.0,
+            "y": 225.0
+          },
+          "p2": {
+            "x": 626.0,
+            "y": 225.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 535.0,
+          "y": 340.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "NT_1_2",
+      "points": [
+        {
+          "x": 694.0,
+          "y": 225.0
+        },
+        {
+          "x": 785.0,
+          "y": 225.0
+        },
+        {
+          "x": 785.0,
+          "y": 340.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NT_1_2",
+          "p1": {
+            "x": 694.0,
+            "y": 225.0
+          },
+          "p2": {
+            "x": 785.0,
+            "y": 225.0
+          }
+        },
+        {
+          "net_id": "NT_1_2",
+          "p1": {
+            "x": 785.0,
+            "y": 225.0
+          },
+          "p2": {
+            "x": 785.0,
+            "y": 340.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 785.0,
+          "y": 340.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "NB_1_1",
+      "points": [
+        {
+          "x": 535.0,
+          "y": 340.0
+        },
+        {
+          "x": 535.0,
+          "y": 455.0
+        },
+        {
+          "x": 626.0,
+          "y": 455.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NB_1_1",
+          "p1": {
+            "x": 535.0,
+            "y": 340.0
+          },
+          "p2": {
+            "x": 535.0,
+            "y": 455.0
+          }
+        },
+        {
+          "net_id": "NB_1_1",
+          "p1": {
+            "x": 535.0,
+            "y": 455.0
+          },
+          "p2": {
+            "x": 626.0,
+            "y": 455.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NB_1_2",
+      "points": [
+        {
+          "x": 694.0,
+          "y": 455.0
+        },
+        {
+          "x": 785.0,
+          "y": 455.0
+        },
+        {
+          "x": 785.0,
+          "y": 340.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NB_1_2",
+          "p1": {
+            "x": 694.0,
+            "y": 455.0
+          },
+          "p2": {
+            "x": 785.0,
+            "y": 455.0
+          }
+        },
+        {
+          "net_id": "NB_1_2",
+          "p1": {
+            "x": 785.0,
+            "y": 455.0
+          },
+          "p2": {
+            "x": 785.0,
+            "y": 340.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NR_OUT",
+      "points": [
+        {
+          "x": 785.0,
+          "y": 340.0
+        },
+        {
+          "x": 1130.0,
+          "y": 340.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NR_OUT",
+          "p1": {
+            "x": 785.0,
+            "y": 340.0
+          },
+          "p2": {
+            "x": 1130.0,
+            "y": 340.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    }
+  ],
+  "bridges": [],
+  "connections": [],
+  "secondary_panel": null,
+  "panel_labels": [
+    "PANEL A: BASELINE",
+    "PANEL B: REVISION"
+  ],
+  "metadata": {
+    "resistance_tree": {
+      "type": "series",
+      "children": [
+        {
+          "type": "resistor",
+          "id": "R1",
+          "ohm": 50
+        },
+        {
+          "type": "parallel",
+          "children": [
+            {
+              "type": "resistor",
+              "id": "R2",
+              "ohm": 120
+            },
+            {
+              "type": "resistor",
+              "id": "R3",
+              "ohm": 60
+            }
+          ]
+        }
+      ]
+    },
+    "expected_fraction": "90",
+    "seed": 505003,
+    "family": "equivalent_resistance",
+    "difficulty": "easy"
+  }
+}

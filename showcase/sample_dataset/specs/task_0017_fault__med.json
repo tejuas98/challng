@@ -1,0 +1,856 @@
+{
+  "canvas_width": 1280,
+  "canvas_height": 800,
+  "drawing_title": "PROBE-ASSISTED FAULT ISOLATION",
+  "drawing_number": "SF-FLT-42173",
+  "revision": "A",
+  "rule_banner": "CANDIDATE FAULTS -> A: Gate U2 output stuck LOW | B: Fuse F1 blown open | C: Gate U2 output inverted | D: Gate U1 output stuck LOW",
+  "label_mode": "symbol_only",
+  "components": [
+    {
+      "id": "VCC1",
+      "kind": "source",
+      "center": {
+        "x": 85.0,
+        "y": 210.0
+      },
+      "orientation": 0,
+      "ports": {
+        "out": {
+          "x": 111.0,
+          "y": 210.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 1,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "5V",
+      "display_tag": null
+    },
+    {
+      "id": "VCC2",
+      "kind": "source",
+      "center": {
+        "x": 85.0,
+        "y": 410.0
+      },
+      "orientation": 0,
+      "ports": {
+        "out": {
+          "x": 111.0,
+          "y": 410.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 0,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "0V",
+      "display_tag": null
+    },
+    {
+      "id": "F1",
+      "kind": "fuse",
+      "center": {
+        "x": 210.0,
+        "y": 210.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 180.0,
+          "y": 210.0
+        },
+        "out": {
+          "x": 240.0,
+          "y": 210.0
+        }
+      },
+      "closed": null,
+      "intact": true,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "2A",
+      "display_tag": null
+    },
+    {
+      "id": "SW1",
+      "kind": "switch",
+      "center": {
+        "x": 345.0,
+        "y": 210.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 315.0,
+          "y": 210.0
+        },
+        "out": {
+          "x": 375.0,
+          "y": 210.0
+        }
+      },
+      "closed": true,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "SW2",
+      "kind": "switch",
+      "center": {
+        "x": 250.0,
+        "y": 410.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 220.0,
+          "y": 410.0
+        },
+        "out": {
+          "x": 280.0,
+          "y": 410.0
+        }
+      },
+      "closed": true,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "U1",
+      "kind": "gate_nand",
+      "center": {
+        "x": 540.0,
+        "y": 290.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in0": {
+          "x": 502.0,
+          "y": 276.0
+        },
+        "in1": {
+          "x": 502.0,
+          "y": 304.0
+        },
+        "out": {
+          "x": 582.0,
+          "y": 290.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "U2",
+      "kind": "gate_nor",
+      "center": {
+        "x": 760.0,
+        "y": 355.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in0": {
+          "x": 722.0,
+          "y": 341.0
+        },
+        "in1": {
+          "x": 722.0,
+          "y": 369.0
+        },
+        "out": {
+          "x": 802.0,
+          "y": 355.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "L1",
+      "kind": "led",
+      "center": {
+        "x": 985.0,
+        "y": 355.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 961.0,
+          "y": 355.0
+        },
+        "gnd": {
+          "x": 1009.0,
+          "y": 355.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "TP1",
+      "kind": "probe",
+      "center": {
+        "x": 280.0,
+        "y": 155.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 280.0,
+          "y": 210.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 1,
+      "probe_label": "TP1: 5V (HIGH)",
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "TP2",
+      "kind": "probe",
+      "center": {
+        "x": 635.0,
+        "y": 230.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 635.0,
+          "y": 290.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 0,
+      "probe_label": "TP2: 0V (LOW)",
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "TP3",
+      "kind": "probe",
+      "center": {
+        "x": 870.0,
+        "y": 290.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 870.0,
+          "y": 355.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 1,
+      "probe_label": "TP3: 5V (HIGH)",
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    }
+  ],
+  "nets": [
+    {
+      "net_id": "N1",
+      "points": [
+        {
+          "x": 111.0,
+          "y": 210.0
+        },
+        {
+          "x": 180.0,
+          "y": 210.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N1",
+          "p1": {
+            "x": 111.0,
+            "y": 210.0
+          },
+          "p2": {
+            "x": 180.0,
+            "y": 210.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N2",
+      "points": [
+        {
+          "x": 240.0,
+          "y": 210.0
+        },
+        {
+          "x": 315.0,
+          "y": 210.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N2",
+          "p1": {
+            "x": 240.0,
+            "y": 210.0
+          },
+          "p2": {
+            "x": 315.0,
+            "y": 210.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 280.0,
+          "y": 210.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "N3",
+      "points": [
+        {
+          "x": 375.0,
+          "y": 210.0
+        },
+        {
+          "x": 445.0,
+          "y": 210.0
+        },
+        {
+          "x": 445.0,
+          "y": 276.0
+        },
+        {
+          "x": 502.0,
+          "y": 276.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N3",
+          "p1": {
+            "x": 375.0,
+            "y": 210.0
+          },
+          "p2": {
+            "x": 445.0,
+            "y": 210.0
+          }
+        },
+        {
+          "net_id": "N3",
+          "p1": {
+            "x": 445.0,
+            "y": 210.0
+          },
+          "p2": {
+            "x": 445.0,
+            "y": 276.0
+          }
+        },
+        {
+          "net_id": "N3",
+          "p1": {
+            "x": 445.0,
+            "y": 276.0
+          },
+          "p2": {
+            "x": 502.0,
+            "y": 276.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N4",
+      "points": [
+        {
+          "x": 111.0,
+          "y": 410.0
+        },
+        {
+          "x": 220.0,
+          "y": 410.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N4",
+          "p1": {
+            "x": 111.0,
+            "y": 410.0
+          },
+          "p2": {
+            "x": 220.0,
+            "y": 410.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N5",
+      "points": [
+        {
+          "x": 280.0,
+          "y": 410.0
+        },
+        {
+          "x": 415.0,
+          "y": 410.0
+        },
+        {
+          "x": 415.0,
+          "y": 304.0
+        },
+        {
+          "x": 502.0,
+          "y": 304.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N5",
+          "p1": {
+            "x": 280.0,
+            "y": 410.0
+          },
+          "p2": {
+            "x": 415.0,
+            "y": 410.0
+          }
+        },
+        {
+          "net_id": "N5",
+          "p1": {
+            "x": 415.0,
+            "y": 410.0
+          },
+          "p2": {
+            "x": 415.0,
+            "y": 304.0
+          }
+        },
+        {
+          "net_id": "N5",
+          "p1": {
+            "x": 415.0,
+            "y": 304.0
+          },
+          "p2": {
+            "x": 502.0,
+            "y": 304.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 415.0,
+          "y": 410.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "N6",
+      "points": [
+        {
+          "x": 582.0,
+          "y": 290.0
+        },
+        {
+          "x": 650.0,
+          "y": 290.0
+        },
+        {
+          "x": 650.0,
+          "y": 341.0
+        },
+        {
+          "x": 722.0,
+          "y": 341.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N6",
+          "p1": {
+            "x": 582.0,
+            "y": 290.0
+          },
+          "p2": {
+            "x": 650.0,
+            "y": 290.0
+          }
+        },
+        {
+          "net_id": "N6",
+          "p1": {
+            "x": 650.0,
+            "y": 290.0
+          },
+          "p2": {
+            "x": 650.0,
+            "y": 341.0
+          }
+        },
+        {
+          "net_id": "N6",
+          "p1": {
+            "x": 650.0,
+            "y": 341.0
+          },
+          "p2": {
+            "x": 722.0,
+            "y": 341.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 635.0,
+          "y": 290.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "N7",
+      "points": [
+        {
+          "x": 280.0,
+          "y": 410.0
+        },
+        {
+          "x": 415.0,
+          "y": 410.0
+        },
+        {
+          "x": 415.0,
+          "y": 369.0
+        },
+        {
+          "x": 722.0,
+          "y": 369.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N7",
+          "p1": {
+            "x": 280.0,
+            "y": 410.0
+          },
+          "p2": {
+            "x": 415.0,
+            "y": 410.0
+          }
+        },
+        {
+          "net_id": "N7",
+          "p1": {
+            "x": 415.0,
+            "y": 410.0
+          },
+          "p2": {
+            "x": 415.0,
+            "y": 369.0
+          }
+        },
+        {
+          "net_id": "N7",
+          "p1": {
+            "x": 415.0,
+            "y": 369.0
+          },
+          "p2": {
+            "x": 722.0,
+            "y": 369.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N8",
+      "points": [
+        {
+          "x": 802.0,
+          "y": 355.0
+        },
+        {
+          "x": 961.0,
+          "y": 355.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N8",
+          "p1": {
+            "x": 802.0,
+            "y": 355.0
+          },
+          "p2": {
+            "x": 961.0,
+            "y": 355.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 870.0,
+          "y": 355.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "NTP1",
+      "points": [
+        {
+          "x": 280.0,
+          "y": 210.0
+        },
+        {
+          "x": 280.0,
+          "y": 170.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NTP1",
+          "p1": {
+            "x": 280.0,
+            "y": 210.0
+          },
+          "p2": {
+            "x": 280.0,
+            "y": 170.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NTP2",
+      "points": [
+        {
+          "x": 635.0,
+          "y": 290.0
+        },
+        {
+          "x": 635.0,
+          "y": 245.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NTP2",
+          "p1": {
+            "x": 635.0,
+            "y": 290.0
+          },
+          "p2": {
+            "x": 635.0,
+            "y": 245.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "NTP3",
+      "points": [
+        {
+          "x": 870.0,
+          "y": 355.0
+        },
+        {
+          "x": 870.0,
+          "y": 305.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NTP3",
+          "p1": {
+            "x": 870.0,
+            "y": 355.0
+          },
+          "p2": {
+            "x": 870.0,
+            "y": 305.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    }
+  ],
+  "bridges": [],
+  "connections": [
+    [
+      "VCC1",
+      "out",
+      "F1",
+      "in"
+    ],
+    [
+      "F1",
+      "out",
+      "SW1",
+      "in"
+    ],
+    [
+      "SW1",
+      "out",
+      "U1",
+      "in0"
+    ],
+    [
+      "VCC2",
+      "out",
+      "SW2",
+      "in"
+    ],
+    [
+      "SW2",
+      "out",
+      "U1",
+      "in1"
+    ],
+    [
+      "U1",
+      "out",
+      "U2",
+      "in0"
+    ],
+    [
+      "SW2",
+      "out",
+      "U2",
+      "in1"
+    ],
+    [
+      "U2",
+      "out",
+      "L1",
+      "in"
+    ],
+    [
+      "F1",
+      "out",
+      "TP1",
+      "in"
+    ],
+    [
+      "U1",
+      "out",
+      "TP2",
+      "in"
+    ],
+    [
+      "U2",
+      "out",
+      "TP3",
+      "in"
+    ]
+  ],
+  "secondary_panel": null,
+  "panel_labels": [
+    "PANEL A: BASELINE",
+    "PANEL B: REVISION"
+  ],
+  "metadata": {
+    "visible_probes": {
+      "TP1": "ON",
+      "TP2": "OFF",
+      "TP3": "ON"
+    },
+    "fault_candidates": [
+      {
+        "label": "A",
+        "component_id": "U2",
+        "fault_mode": "STUCK_LOW",
+        "text": "A: Gate U2 output stuck LOW"
+      },
+      {
+        "label": "B",
+        "component_id": "F1",
+        "fault_mode": "OPEN",
+        "text": "B: Fuse F1 blown open"
+      },
+      {
+        "label": "C",
+        "component_id": "U2",
+        "fault_mode": "INVERT_BUBBLE",
+        "text": "C: Gate U2 output inverted"
+      },
+      {
+        "label": "D",
+        "component_id": "U1",
+        "fault_mode": "STUCK_LOW",
+        "text": "D: Gate U1 output stuck LOW"
+      }
+    ],
+    "seed": 42173,
+    "family": "fault_diagnosis",
+    "difficulty": "medium"
+  }
+}

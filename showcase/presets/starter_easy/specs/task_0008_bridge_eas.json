@@ -1,0 +1,447 @@
+{
+  "canvas_width": 1280,
+  "canvas_height": 800,
+  "drawing_title": "WIRE CROSSING BRIDGE VS JUNCTION TOPOLOGY",
+  "drawing_number": "SF-BRJ-101139",
+  "revision": "A",
+  "rule_banner": null,
+  "label_mode": "symbol_only",
+  "components": [
+    {
+      "id": "BUS1",
+      "kind": "source",
+      "center": {
+        "x": 115.0,
+        "y": 170.0
+      },
+      "orientation": 0,
+      "ports": {
+        "out": {
+          "x": 141.0,
+          "y": 170.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 0,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "0V",
+      "display_tag": null
+    },
+    {
+      "id": "BUS2",
+      "kind": "source",
+      "center": {
+        "x": 115.0,
+        "y": 245.0
+      },
+      "orientation": 0,
+      "ports": {
+        "out": {
+          "x": 141.0,
+          "y": 245.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": 1,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": "5V",
+      "display_tag": null
+    },
+    {
+      "id": "SW1",
+      "kind": "switch",
+      "center": {
+        "x": 310.0,
+        "y": 445.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 280.0,
+          "y": 445.0
+        },
+        "out": {
+          "x": 340.0,
+          "y": 445.0
+        }
+      },
+      "closed": true,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "L1",
+      "kind": "led",
+      "center": {
+        "x": 455.0,
+        "y": 525.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 431.0,
+          "y": 525.0
+        },
+        "gnd": {
+          "x": 479.0,
+          "y": 525.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "SW2",
+      "kind": "switch",
+      "center": {
+        "x": 580.0,
+        "y": 445.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 550.0,
+          "y": 445.0
+        },
+        "out": {
+          "x": 610.0,
+          "y": 445.0
+        }
+      },
+      "closed": true,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    },
+    {
+      "id": "L2",
+      "kind": "led",
+      "center": {
+        "x": 725.0,
+        "y": 525.0
+      },
+      "orientation": 0,
+      "ports": {
+        "in": {
+          "x": 701.0,
+          "y": 525.0
+        },
+        "gnd": {
+          "x": 749.0,
+          "y": 525.0
+        }
+      },
+      "closed": null,
+      "intact": null,
+      "resistance_ohm": null,
+      "voltage_level": null,
+      "probe_label": null,
+      "stuck_fault": null,
+      "value_text": null,
+      "display_tag": null
+    }
+  ],
+  "nets": [
+    {
+      "net_id": "NET_RAIL_0",
+      "points": [
+        {
+          "x": 141.0,
+          "y": 170.0
+        },
+        {
+          "x": 620.0,
+          "y": 170.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NET_RAIL_0",
+          "p1": {
+            "x": 141.0,
+            "y": 170.0
+          },
+          "p2": {
+            "x": 620.0,
+            "y": 170.0
+          }
+        },
+        {
+          "net_id": "NET_RAIL_0",
+          "p1": {
+            "x": 262.0,
+            "y": 170.0
+          },
+          "p2": {
+            "x": 262.0,
+            "y": 445.0
+          }
+        },
+        {
+          "net_id": "NET_RAIL_0",
+          "p1": {
+            "x": 262.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 280.0,
+            "y": 445.0
+          }
+        },
+        {
+          "net_id": "NET_RAIL_0",
+          "p1": {
+            "x": 532.0,
+            "y": 170.0
+          },
+          "p2": {
+            "x": 532.0,
+            "y": 445.0
+          }
+        },
+        {
+          "net_id": "NET_RAIL_0",
+          "p1": {
+            "x": 532.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 550.0,
+            "y": 445.0
+          }
+        }
+      ],
+      "junction_dots": [
+        {
+          "x": 262.0,
+          "y": 170.0
+        },
+        {
+          "x": 532.0,
+          "y": 170.0
+        }
+      ],
+      "color_hint": null
+    },
+    {
+      "net_id": "NET_RAIL_1",
+      "points": [
+        {
+          "x": 141.0,
+          "y": 245.0
+        },
+        {
+          "x": 620.0,
+          "y": 245.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "NET_RAIL_1",
+          "p1": {
+            "x": 141.0,
+            "y": 245.0
+          },
+          "p2": {
+            "x": 620.0,
+            "y": 245.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N_SW1_L1",
+      "points": [
+        {
+          "x": 340.0,
+          "y": 445.0
+        },
+        {
+          "x": 375.0,
+          "y": 445.0
+        },
+        {
+          "x": 375.0,
+          "y": 525.0
+        },
+        {
+          "x": 431.0,
+          "y": 525.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N_SW1_L1",
+          "p1": {
+            "x": 340.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 375.0,
+            "y": 445.0
+          }
+        },
+        {
+          "net_id": "N_SW1_L1",
+          "p1": {
+            "x": 375.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 375.0,
+            "y": 525.0
+          }
+        },
+        {
+          "net_id": "N_SW1_L1",
+          "p1": {
+            "x": 375.0,
+            "y": 525.0
+          },
+          "p2": {
+            "x": 431.0,
+            "y": 525.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    },
+    {
+      "net_id": "N_SW2_L2",
+      "points": [
+        {
+          "x": 610.0,
+          "y": 445.0
+        },
+        {
+          "x": 645.0,
+          "y": 445.0
+        },
+        {
+          "x": 645.0,
+          "y": 525.0
+        },
+        {
+          "x": 701.0,
+          "y": 525.0
+        }
+      ],
+      "segments": [
+        {
+          "net_id": "N_SW2_L2",
+          "p1": {
+            "x": 610.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 645.0,
+            "y": 445.0
+          }
+        },
+        {
+          "net_id": "N_SW2_L2",
+          "p1": {
+            "x": 645.0,
+            "y": 445.0
+          },
+          "p2": {
+            "x": 645.0,
+            "y": 525.0
+          }
+        },
+        {
+          "net_id": "N_SW2_L2",
+          "p1": {
+            "x": 645.0,
+            "y": 525.0
+          },
+          "p2": {
+            "x": 701.0,
+            "y": 525.0
+          }
+        }
+      ],
+      "junction_dots": [],
+      "color_hint": null
+    }
+  ],
+  "bridges": [
+    {
+      "center": {
+        "x": 262.0,
+        "y": 245.0
+      },
+      "axis": "vertical",
+      "radius": 10.0
+    },
+    {
+      "center": {
+        "x": 532.0,
+        "y": 245.0
+      },
+      "axis": "vertical",
+      "radius": 10.0
+    }
+  ],
+  "connections": [
+    [
+      "BUS1",
+      "out",
+      "SW1",
+      "in"
+    ],
+    [
+      "SW1",
+      "out",
+      "L1",
+      "in"
+    ],
+    [
+      "BUS1",
+      "out",
+      "SW2",
+      "in"
+    ],
+    [
+      "SW2",
+      "out",
+      "L2",
+      "in"
+    ]
+  ],
+  "secondary_panel": null,
+  "panel_labels": [
+    "PANEL A: BASELINE",
+    "PANEL B: REVISION"
+  ],
+  "metadata": {
+    "target_lamp": "L1",
+    "seed": 101139,
+    "family": "bridge_vs_junction",
+    "difficulty": "easy"
+  }
+}
