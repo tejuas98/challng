@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SchemForge | Visual Circuit Questions &amp; Answer Checker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=MuseoModerno:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+try {
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('schemforge_theme_pref') === 'light' ? 'light' : 'dark');
+} catch (e) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+</script>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<div id="splash-overlay" aria-live="polite">
+  <div class="splash-card">
+    <svg viewBox="0 0 48 48" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--copper); display:block; margin:0 auto 12px auto;">
+      <circle class="splash-ring" cx="24" cy="24" r="14" stroke="var(--copper)" stroke-width="1.2" stroke-opacity="0.45"/>
+      <path class="splash-trace-path" d="M24 4v14M24 30v14M4 24h14M30 24h14"/>
+      <path class="splash-trace-path" d="M24 11l8-6M24 37l-8 6M11 24l-6-8M37 24l6 8"/>
+      <circle class="splash-core" cx="24" cy="24" r="5.5" fill="var(--paper-card)"/>
+      <circle cx="24" cy="4" r="2.2" fill="var(--copper)" stroke="none"/>
+      <circle cx="24" cy="44" r="2.2" fill="var(--copper)" stroke="none"/>
+      <circle cx="4" cy="24" r="2.2" fill="var(--copper)" stroke="none"/>
+      <circle cx="44" cy="24" r="2.2" fill="var(--copper)" stroke="none"/>
+      <circle cx="32.5" cy="4.5" r="2" fill="var(--ink)" stroke="none"/>
+      <circle cx="15.5" cy="43.5" r="2" fill="var(--ink)" stroke="none"/>
+    </svg>
+    <div class="splash-wordmark" style="font-family:var(--font-logo); font-size:34px; font-weight:800; letter-spacing:-0.015em; color:var(--ink);">SchemForge</div>
+    <div class="splash-submark" style="font-size:12px; color:var(--ink-muted); margin-top:4px;">Initializing Visual Circuit Studio&hellip;</div>
+    <div class="splash-progress"><div class="splash-progress-fill"></div></div>
+  </div>
+</div>
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="color:var(--copper);">
+          <path class="logo-trace" d="M14 3v7.5M14 17.5V25M3 14h7.5M17.5 14H25"/>
+          <path class="logo-trace" d="M14 6.5l4.5-3.5M14 21.5l-4.5 3.5M6.5 14l-3.5-4.5M21.5 14l3.5 4.5"/>
+          <circle class="logo-core" cx="14" cy="14" r="3.2" fill="var(--paper-card)"/>
+          <circle cx="14" cy="3" r="1.4" fill="var(--copper)" stroke="none"/>
+          <circle cx="14" cy="25" r="1.4" fill="var(--copper)" stroke="none"/>
+          <circle cx="3" cy="14" r="1.4" fill="var(--copper)" stroke="none"/>
+          <circle cx="25" cy="14" r="1.4" fill="var(--copper)" stroke="none"/>
+          <circle cx="18.8" cy="3" r="1.3" fill="var(--ink)" stroke="none"/>
+          <circle cx="9.2" cy="25" r="1.3" fill="var(--ink)" stroke="none"/>
+        </svg>
+      </div>
+      <div>
+        <h1>SchemForge</h1>
+        <div class="brand-sub">Create, inspect, and check visual circuit questions with verified answers</div>
+      </div>
+    </div>
+    <div class="corner-controls" role="toolbar" aria-label="Studio preferences and guide">
+      <button type="button" class="corner-icon-btn" id="color-toggle" onclick="toggleColorMenu()" title="Accent Color Theme" aria-label="Choose Accent Color Theme" aria-expanded="false">
+        <span class="accent-swatch-dot" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="corner-icon-btn" id="sound-toggle" onclick="toggleSound()" title="Mute subtle click sound" aria-label="Toggle UI click sound" aria-pressed="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+      <button type="button" class="corner-icon-btn" id="theme-toggle" onclick="toggleTheme()" title="Switch Light / Dark Mode" aria-label="Switch Light / Dark Mode">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"/></svg>
+      </button>
+      <button type="button" id="tab-help-btn" class="corner-icon-btn" commandfor="app-info-dialog" command="show-modal" title="App Guide &amp; Info" aria-label="Open SchemForge Info Guide">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="header-nav">
+    <div class="header-nav-inner">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('inspector', this)">
+          <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+          <span>Browse Questions</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('batches', this)">
+          <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><path d="M11.25 9v4.5M9 11.25h4.5"/></svg>
+          <span>Create Question Bank</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('netlist', this)">
+          <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="3" cy="8" r="1.5"/><circle cx="13" cy="5" r="1.5"/><circle cx="13" cy="11" r="1.5"/><path d="M4.5 8h3l2-3h2M7.5 8l2 3h2"/></svg>
+          <span>Build Your Own Circuit</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('evaluation', this)">
+          <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>
+          <span>AI Test Scores</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<dialog id="app-info-dialog">
+  <div class="info-dlg-hdr">
+    <div style="display:flex; align-items:center; gap:9px;">
+      <svg viewBox="0 0 28 28" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--copper);">
+        <circle cx="14" cy="14" r="3.2" fill="var(--paper-card)"/>
+        <path d="M14 3v7.5M14 17.5V25M3 14h7.5M17.5 14H25"/>
+        <circle cx="14" cy="3" r="1.5" fill="var(--copper)" stroke="none"/>
+        <circle cx="14" cy="25" r="1.5" fill="var(--copper)" stroke="none"/>
+        <circle cx="3" cy="14" r="1.5" fill="var(--copper)" stroke="none"/>
+        <circle cx="25" cy="14" r="1.5" fill="var(--copper)" stroke="none"/>
+      </svg>
+      <strong style="font-size:15px;">Welcome to SchemForge &mdash; Circuit Studio Guide</strong>
+    </div>
+    <button type="button" id="info-dlg-x" class="secondary" style="height:26px; min-block-size:26px; padding:0 9px; font-size:12px;" commandfor="app-info-dialog" command="close">
+      <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      <span>Close</span>
+    </button>
+  </div>
+  <div class="info-dlg-body">
+    <div style="color:var(--ink-muted);">
+      SchemForge creates visual electrical schematic questions with verified step-by-step proofs, checks every drawing for zero overlapping labels, and tests whether Vision AI models actually trace wires and symbols instead of guessing from printed text. Ready-made question sets are loaded so you can explore right away.
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <strong>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+          Browse Questions &mdash; Verified Answers &amp; Clarity
+        </strong>
+        Switch between the 6 built-in sets (<i>Default Mix</i>, <i>Easy Practice</i>, <i>Medium Challenge</i>, <i>Hard Exam</i>, <i>Switches &amp; Logic</i>, <i>Resistors &amp; Ohms</i>) at top-left, filter by Topic/Difficulty/Scan Look, or click any schematic image to zoom in. Each item shows the verified answer, overlap check, OCR readout, and exact trace steps.
+      </div>
+      <div class="info-card">
+        <strong>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><path d="M11.25 9v4.5M9 11.25h4.5"/></svg>
+          Create Question Bank &mdash; Custom Sets &amp; .ZIP
+        </strong>
+        Use the top <b>Create Custom Question Set</b> panel to generate 1 to 25,000 non-repetitive questions with live countdown progress, or pick any pre-built set in <b>Question Sets &amp; Bank Library</b> below to browse or download a portable <code>.ZIP</code> (Quiz Booklet HTML + Excel CSV + PNGs). Quick Try Live Preview lets you test single circuits interactively.
+      </div>
+      <div class="info-card">
+        <strong>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><circle cx="3" cy="8" r="1.5"/><circle cx="13" cy="5" r="1.5"/><circle cx="13" cy="11" r="1.5"/><path d="M4.5 8h3l2-3h2M7.5 8l2 3h2"/></svg>
+          Build Your Own Circuit &mdash; Live Topology Compiler
+        </strong>
+        Load a starter circuit example or write simple wire paths (such as <code>VCC1(12V) -&gt; SW1(CLOSED) -&gt; U1(AND) -&gt; L1</code>). SchemForge renders the drawing and recalculates the exact answer &amp; steps live as you type, and can expand any custom circuit into up to <code>10,000+</code> unique variations.
+      </div>
+      <div class="info-card">
+        <strong>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>
+          AI Test Scores &mdash; Vision Comparison &amp; Checks
+        </strong>
+        Run Vision AI models (<i>Google Gemini</i>, <i>OpenRouter</i>, <i>Local Ollama</i>, or add <i>Claude</i> / <i>OpenAI</i> / any custom API key via <b>+ Add Model / Key</b>) side-by-side against <i>Word Reader</i> and <i>Random Guess</i> baselines, inspect exact missed questions below the chart, and run all 12 broken-circuit guardrail tests live.
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:flex-start; background:var(--copper-soft); border-left:3px solid var(--copper); border-radius:4px; padding:9px 12px; font-size:12px; color:var(--ink);">
+      <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" style="flex-shrink:0; margin-top:1px;"><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/></svg>
+      <div>
+        <b>Quick Studio Overview:</b> Open <i>Hard Exam Pack</i> in Browse Questions to inspect symbol-only schematics and traces; use Create Question Bank to download a <code>.ZIP</code> or generate custom batches with live progress; flip a switch state (<code>CLOSED</code> &harr; <code>OPEN</code>) in Build Your Own Circuit to watch the schematic recalculate live; compare Vision AI against <i>Word Reader</i> and inspect <b>Visual Proof</b> in AI Test Scores.
+      </div>
+    </div>
+  </div>
+  <div class="info-dlg-ftr">
+    <span style="font-size:11.5px; color:var(--ink-faint);">Tip: Reopen this guide anytime via the <b>Info</b> icon in the top-right corner bar.</span>
+    <button type="button" id="info-dlg-start" class="primary" commandfor="app-info-dialog" command="close">
+      <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M4 2.5v11l9-5.5-9-5.5z"/></svg>
+      <span>Start Using SchemForge</span>
+    </button>
+  </div>
+</dialog>
+
+<div class="container">
+  <div id="tab-inspector">
+
+    <div class="toolbar">
+      <div class="tb-row tb-cols-browse">
+        <label class="field">Question Set
+          <div class="set-ctl-wrap">
+            <select id="f-batch" onchange="pageSize=100; syncSetDeleteBtn(); loadTasks(true)"><option value="default">default</option></select>
+            <button type="button" class="icon-btn" onclick="goCreateSetTab()" title="Create new Question Set (Add)">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+            </button>
+            <button type="button" id="f-batch-del" class="icon-btn danger" onclick="deleteSelectedBatch()" title="Delete selected Question Set" disabled>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4h11M6 4V2.5h4V4M5 6.5v5.5M8 6.5v5.5M11 6.5v5.5M3.5 4l.7 9a1 1 0 0 0 1 .9h5.6a1 1 0 0 0 1-.9l.7-9"/></svg>
+            </button>
+          </div>
+        </label>
+        <label class="field">Topic
+          <select id="f-family" onchange="loadTasks()">
+            <option value="">All 7 Topics</option>
+            <option value="state_propagation">Switches &amp; Logic Gates</option>
+            <option value="bridge_vs_junction">Crossing Wires (Bridge vs Dot)</option>
+            <option value="equivalent_resistance">Total Resistance (Ohms)</option>
+            <option value="fault_diagnosis">Find the Broken Part</option>
+            <option value="counterfactual_pair">Spot the Difference (Before/After)</option>
+            <option value="component_audit">Count &amp; Read Parts</option>
+            <option value="whole_system">Full System (Power + Gates + Ohms)</option>
+            <option value="custom_netlist">Your Custom Circuits</option>
+          </select>
+        </label>
+        <label class="field">Difficulty
+          <select id="f-diff" onchange="loadTasks()">
+            <option value="">All Levels</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+        <label class="field">Scan Look
+          <select id="f-deg" onchange="loadTasks()">
+            <option value="">All Looks</option>
+            <option value="clean">Clean Drawing</option>
+            <option value="office_scan">Scanned Page</option>
+            <option value="mobile_photo">Phone Camera Photo</option>
+            <option value="low_contrast_fax">Faded / Low Contrast</option>
+          </select>
+        </label>
+        <label class="field">Search
+          <input id="f-search" type="search" placeholder="Question, answer, or #number..." oninput="scheduleSearch()" />
+        </label>
+      </div>
+    </div>
+
+    <div class="split-layout">
+      <div class="task-list" id="task-list"></div>
+      <div class="inspector" id="task-detail">Click any question on the left to inspect its circuit drawing, verified answer, and step-by-step solution.</div>
+    </div>
+  </div>
+
+  <div id="tab-batches" class="hidden">
+    <div class="bank-stack">
+
+      <section class="bank-card">
+        <div class="creator-split">
+          <div class="creator-left">
+            <div>
+              <h3 class="bank-side-title">
+                <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><path d="M11.25 9v4.5M9 11.25h4.5"/></svg>
+                <span>Create Custom Question Set</span>
+              </h3>
+              <div class="bank-card-sub">Choose size, topic, and style below &mdash; or browse any ready-made set right underneath.</div>
+            </div>
+
+            <div class="creator-grid-3x2">
+              <label class="line-field">Set Name
+                <input id="b-name" value="my_circuit_quiz" placeholder="my_circuit_quiz" />
+              </label>
+              <label class="line-field" title="Type any number from 1 up to 25,000">Questions
+                <input id="b-count" type="number" min="1" max="25000" value="30" placeholder="30" oninput="updateBatchProbability()" />
+              </label>
+              <label class="line-field">Topic
+                <select id="b-family" onchange="updateBatchProbability()">
+                  <option value="">All 7 Topics</option>
+                  <option value="state_propagation">Switches &amp; Logic Gates</option>
+                  <option value="bridge_vs_junction">Crossing Wires</option>
+                  <option value="equivalent_resistance">Total Resistance (Ohms)</option>
+                  <option value="fault_diagnosis">Find Broken Part</option>
+                  <option value="counterfactual_pair">Spot Difference (A vs B)</option>
+                  <option value="component_audit">Count &amp; Read Parts</option>
+                  <option value="whole_system">Full System</option>
+                </select>
+              </label>
+              <label class="line-field">Difficulty
+                <select id="b-diff" onchange="updateBatchProbability()">
+                  <option value="">Mix Levels</option>
+                  <option value="easy">Easy Only</option>
+                  <option value="medium">Medium Only</option>
+                  <option value="hard">Hard Only</option>
+                </select>
+              </label>
+              <label class="line-field">Drawing Style
+                <select id="b-theme" onchange="updateBatchProbability()">
+                  <option value="">Mix All 4 Styles</option>
+                  <option value="ieee_classic">Blue-Grid Textbook</option>
+                  <option value="aged_paper">Cream Paper</option>
+                  <option value="high_contrast_mono">Black &amp; White Exam</option>
+                  <option value="kicad_blueprint">Dark Blue CAD</option>
+                </select>
+              </label>
+              <label class="line-field">Part Labels
+                <select id="b-lbl" onchange="updateBatchProbability()">
+                  <option value="">Symbols Only (Mix)</option>
+                  <option value="symbol_only">Symbols Only (Visual Test)</option>
+                  <option value="annotated">Show Part Values</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="creator-left-ftr">
+              <label style="font-size:11.5px; color:var(--ink-muted); gap:6px;">
+                <span>Image Look:</span>
+                <select id="b-deg" onchange="updateBatchProbability()" style="height:26px; min-block-size:26px; font-size:11.5px; padding:0 22px 0 8px;">
+                  <option value="" selected>Clean + Scanned Mix</option>
+                  <option value="clean">Clean Digital Only</option>
+                  <option value="office_scan">Scanned Page Only</option>
+                  <option value="mobile_photo">Phone Photo Only</option>
+                  <option value="low_contrast_fax">Faded Print Only</option>
+                </select>
+              </label>
+              <details class="advanced-box" style="width:auto; border-top:none; margin-top:0; padding-top:0;">
+                <summary style="font-size:11.5px;">More Options (Repeat Code &amp; Speed)</summary>
+                <div class="adv-row" style="margin-top:8px;">
+                  <label style="font-size:11.5px;" title="Keep the same number to regenerate the exact same circuits later">Repeat Code: <input id="b-seed" type="number" value="777" style="width:74px; height:26px; min-block-size:26px;" /></label>
+                  <button type="button" class="secondary" style="height:26px; min-block-size:26px;" onclick="randomizeInput('b-seed')">New Code</button>
+                  <label style="font-size:11.5px;"><input id="b-lazy" type="checkbox" checked /> Fast Save for 120+ sets (builds question list now, renders PNGs on open)</label>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div class="creator-well">
+            <div>
+              <div class="preset-chips" style="margin-bottom:8px;">
+                <button type="button" class="tmpl-chip active" onclick="applyBankTemplate('full_mix', this)">
+                  <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>
+                  <span>Mix 30</span>
+                </button>
+                <button type="button" class="tmpl-chip" onclick="applyBankTemplate('hard_logic', this)">
+                  <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2L4 9h4l-1.5 5L12 7H8l1.5-5z"/></svg>
+                  <span>Hard 50</span>
+                </button>
+                <button type="button" class="tmpl-chip" onclick="applyBankTemplate('clean_exam', this)">
+                  <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="2.5" width="10" height="11" rx="1.5"/><path d="M5.5 6h5M5.5 9h3.5"/></svg>
+                  <span>Exam 40</span>
+                </button>
+                <button type="button" class="tmpl-chip" onclick="applyBankTemplate('ohms_lab', this)">
+                  <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h2l1.5-3 2 6 2-6 1.5 3h3"/></svg>
+                  <span>Ohms 25</span>
+                </button>
+              </div>
+              <div id="batch-prob-info" class="prob-inline">Checking unique question capacity...</div>
+            </div>
+
+            <button type="button" class="primary" style="width:100%; height:36px; border-radius:6px;" onclick="launchBatch()">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+              Create Question Set
+            </button>
+
+            <div id="batch-live-status" class="mono" style="font-size:11.5px; color:var(--ink-muted);">
+              Ready &mdash; click above to generate a zero-duplicate .ZIP pack.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bank-card">
+        <div class="bank-card-hdr">
+          <div>
+            <h3 class="bank-side-title">
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5a1 1 0 0 1 1-1h3.2l1.3 1.5H13a1 1 0 0 1 1 1v6.5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4.5z"/></svg>
+              <span>Question Sets &amp; Bank Library</span>
+            </h3>
+            <div class="bank-card-sub">Ready-made Easy, Medium, Hard &amp; topic packs plus your custom sets &mdash; inspect what is inside, browse questions, or download .ZIP bundles.</div>
+          </div>
+          <span id="batch-count-pill" class="badge ok">6 sets ready</span>
+        </div>
+        <div id="batch-table" style="overflow-x:auto;">Loading question sets...</div>
+      </section>
+
+      <section class="bank-card bank-preview-panel">
+        <div class="bank-preview-hdr" style="margin-bottom:4px;">
+          <div>
+            <h3 class="bank-side-title">
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 8s2.4-4.2 6.5-4.2S14.5 8 14.5 8s-2.4 4.2-6.5 4.2S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="1.8"/></svg>
+              <span>Quick Try Live Preview</span>
+            </h3>
+          </div>
+          <div class="pill-controls">
+            <select id="g-family" title="Preview Topic" onchange="onPreviewOptionChange('structure')">
+              <option value="state_propagation">Switches &amp; Gates</option>
+              <option value="bridge_vs_junction">Crossing Wires</option>
+              <option value="equivalent_resistance">Total Resistance</option>
+              <option value="fault_diagnosis">Find Broken Part</option>
+              <option value="counterfactual_pair">Spot Difference</option>
+              <option value="component_audit">Count Parts</option>
+              <option value="whole_system">Full System</option>
+            </select>
+            <select id="g-diff" title="Preview Difficulty" onchange="onPreviewOptionChange('structure')">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <select id="g-theme" title="Preview Paper Style" onchange="onPreviewOptionChange('style')">
+              <option value="ieee_classic" selected>Blue-Grid</option>
+              <option value="aged_paper">Cream Paper</option>
+              <option value="high_contrast_mono">B&amp;W Exam</option>
+              <option value="kicad_blueprint">Blue CAD</option>
+            </select>
+            <select id="g-deg" title="Preview Image Look" onchange="onPreviewOptionChange('style')">
+              <option value="clean">Clean</option>
+              <option value="office_scan">Scanned</option>
+              <option value="mobile_photo">Phone Photo</option>
+              <option value="low_contrast_fax">Faded Fax</option>
+            </select>
+            <select id="g-lbl" title="Preview Labels" onchange="onPreviewOptionChange('style')">
+              <option value="symbol_only">Symbols Only</option>
+              <option value="annotated">Show Values</option>
+            </select>
+            <label class="same-circuit-toggle" title="Keep the same circuit while switching Drawing Style or Labels">
+              <input id="g-lock-seed" type="checkbox" style="margin:0;" /> Keep Layout
+            </label>
+            <input id="g-seed" type="hidden" value="2026" />
+            <button type="button" class="primary" style="height:28px; min-block-size:28px; border-radius:6px; padding:0 12px;" onclick="runLiveGen(false)">
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9L13.5 5.5"/><path d="M13.5 2.5v3h-3"/></svg>
+              New Circuit
+            </button>
+          </div>
+        </div>
+        <div class="inspector" id="live-result">Choose options above to preview a circuit immediately.</div>
+      </section>
+
+    </div>
+  </div>
+
+  <div id="tab-netlist" class="hidden">
+    <div class="toolbar">
+      <div class="tb-inline">
+        <span style="display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:var(--ink-muted);">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><path d="M3 4h10M3 8h7M3 12h5"/></svg>
+          <span>Load starter circuit:</span>
+        </span>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <button class="secondary" style="height:28px; min-block-size:28px;" onclick="loadCustomPreset('voting')">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><circle cx="4" cy="8" r="2"/><path d="M6 8h6M10 5l2.5 3L10 11"/></svg>
+            <span>Safety Sensor</span>
+          </button>
+          <button class="secondary" style="height:28px; min-block-size:28px;" onclick="loadCustomPreset('dualrail')">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><path d="M3 5h5l2 3-2 3H3M10 8h3"/></svg>
+            <span>Dual-Power Backup</span>
+          </button>
+          <button class="secondary" style="height:28px; min-block-size:28px;" onclick="loadCustomPreset('deep')">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><rect x="2.5" y="3.5" width="3.5" height="3.5" rx="0.8"/><rect x="10" y="3.5" width="3.5" height="3.5" rx="0.8"/><rect x="6" y="10" width="4" height="3.5" rx="0.8"/><path d="M6 5h4M8 7v3"/></svg>
+            <span>Multi-Step Factory</span>
+          </button>
+          <button class="secondary" style="height:28px; min-block-size:28px;" onclick="loadCustomPreset('interlock')">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5.5 4L2.5 8l3 4M10.5 4l3 4-3 4"/></svg>
+            <span>Advanced Format (JSON)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="tb-row tb-cols-custom">
+        <label class="field">Circuit Title
+          <input id="c-title" value="3-SENSOR VOTING INTERLOCK" oninput="scheduleCustomLive()" />
+        </label>
+        <label class="field" title="Type any number between 1 and 25,000">Questions (1-25,000)
+          <input id="c-count" type="number" min="1" max="25000" value="100" placeholder="100" oninput="updateCustomProbability()" />
+        </label>
+        <button class="primary" onclick="launchCustomBatch()">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+          Create Unique Variations
+        </button>
+      </div>
+
+      <div id="custom-prob-info" class="prob-callout">
+        Checking exact unique variations possible for your circuit...
+      </div>
+      <div id="custom-batch-status" class="mono" style="width:100%; font-size:12px; color:var(--copper);"></div>
+    </div>
+
+    <div class="netlist-layout">
+      <div class="panel-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:6px; margin-bottom:8px;">
+          <h3 style="display:flex; align-items:center; gap:6px; margin:0; border:none; padding:0;">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round"><path d="M4.5 5L2 8l2.5 3M11.5 5L14 8l-2.5 3M9 4l-2 8"/></svg>
+            <span>Write Circuit Connections (Auto-Updates Live)</span>
+          </h3>
+          <span id="custom-live-badge" class="badge ok" style="font-size:10.5px;">Live</span>
+        </div>
+        <div class="dsl-cheat">
+          <b>Quick guide:</b> Write one wire path per line using <code>-></code>.<br>
+          <code>VCC1(12V)</code> = Power &middot; <code>SW1(CLOSED)</code> or <code>SW1(OPEN)</code> = Switch &middot; <code>F1(OK)</code> = Fuse &middot; <code>U1(AND/OR/NOT/XOR/NAND/NOR)</code> = Logic Gate &middot; <code>L1</code> = Light Output
+        </div>
+        <textarea id="netlist-json" rows="20" oninput="scheduleCustomLive()"># TITLE: 3-SENSOR VOTING INTERLOCK
+VCC1(12V) -> SW1(CLOSED) -> U1(AND) -> U3(OR) -> L1
+VCC1 -> SW2(CLOSED) -> U1
+VCC1 -> SW3(OPEN) -> U2(NAND) -> U3
+SW2 -> U2</textarea>
+      </div>
+      <div class="inspector" id="custom-result">Drawing your starter circuit live...</div>
+    </div>
+  </div>
+
+  <div id="tab-evaluation" class="hidden">
+    <div class="spec-strip" id="kpis"></div>
+
+    <div class="toolbar">
+      <div class="tb-row tb-cols-eval">
+        <label class="field">Question Set
+          <select id="e-batch"><option value="default">default</option></select>
+        </label>
+        <label class="field">Questions
+          <input id="e-limit" type="number" value="14" min="1" max="200" />
+        </label>
+        <button type="button" class="primary" onclick="runEvalLive()">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M4 2.5v11l9-5.5-9-5.5z"/></svg>
+          Run Test
+        </button>
+        <button type="button" class="secondary" onclick="resetEvalCharts()" title="Remove custom live runs from charts">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2.5 8a5.5 5.5 0 0 1 9.4-3.9L13.5 5.5"/><path d="M13.5 2.5v3h-3"/><path d="M13.5 8a5.5 5.5 0 0 1-9.4 3.9L2.5 10.5"/></svg>
+          Reset Charts
+        </button>
+      </div>
+
+      <div class="model-bar">
+        <div class="model-groups-row">
+          <div class="model-group" id="eval-ready-group">
+            <span class="model-group-lbl">Ready AI:</span>
+            <span id="eval-ready-chips" class="model-group"></span>
+          </div>
+          <span class="model-sep" aria-hidden="true"></span>
+          <div class="model-group" id="eval-baseline-chips">
+            <span class="model-group-lbl">Baselines:</span>
+            <label class="model-check"><input type="checkbox" value="ocr_heuristic" checked /> Word Reader</label>
+            <label class="model-check"><input type="checkbox" value="blind_random" /> Random Guess</label>
+            <label class="model-check"><input type="checkbox" value="oracle_solver" /> Answer Key</label>
+          </div>
+        </div>
+        <button type="button" id="toggle-add-model-btn" class="add-model-btn" aria-expanded="false" onclick="toggleAddModelBar()">
+          + Add Model / Key (Claude, OpenAI, Custom)
+        </button>
+      </div>
+
+      <div id="add-model-panel" class="key-drawer hidden">
+        <div class="adv-row" style="margin-top:0;">
+          <label class="field" style="min-width:210px;">Select Model / API
+            <select id="e-prov" onchange="onProviderPickerChange()">
+              <option value="anthropic">Anthropic Claude</option>
+              <option value="openai">OpenAI GPT-4o</option>
+              <option value="gemini">Google Gemini</option>
+              <option value="openrouter">OpenRouter Vision</option>
+              <option value="ollama">Local Ollama (Offline)</option>
+              <option value="custom">Custom Vision API (Any Key)</option>
+            </select>
+          </label>
+          <label class="field" style="min-width:190px;">Model Name (optional)
+            <input id="e-model" placeholder="default model" />
+          </label>
+          <label class="field hidden" id="custom-base-wrap" style="min-width:220px;">API Base URL
+            <input id="e-base-url" placeholder="https://api.example.com/v1" />
+          </label>
+        </div>
+
+        <div id="provider-key-notice"></div>
+
+        <div id="provider-key-row" class="adv-row" style="margin-top:0;">
+          <label class="field" style="flex:1 1 260px; max-width:340px;">API Key
+            <input id="e-key" type="password" placeholder="paste your key" onkeydown="if(event.key==='Enter'){event.preventDefault();saveKeyToEnv();}" />
+          </label>
+          <button type="button" class="primary" style="align-self:flex-end;" onclick="saveKeyToEnv()">Save &amp; Enable Model</button>
+          <button type="button" id="remove-key-btn" class="secondary hidden" style="align-self:flex-end; color:var(--crimson);" onclick="removeSavedKey()">Remove Saved Key</button>
+          <span id="key-save-status" class="mono" style="font-size:11.5px; color:var(--sage); align-self:center;"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="live-eval-box" class="panel-box hidden" style="margin-bottom:14px;"></div>
+
+    <div class="charts-grid" id="charts-grid"></div>
+    <div class="panel-box" style="margin-top:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border-light); padding-bottom:8px; margin-bottom:10px;">
+        <h3 style="display:flex; align-items:center; gap:7px; margin:0; border:none; padding:0;">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--copper)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L3 4.2v3.6c0 3.3 2.1 5.6 5 6.4 2.9-.8 5-3.1 5-6.4V4.2L8 2z"/><path d="M5.8 8l1.6 1.6 3-3.2"/></svg>
+          <span>Automatic Quality Self-Check (12 Broken-Circuit Guardrail Tests)</span>
+        </h3>
+        <button type="button" class="primary" onclick="runMutationsLive()">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v2.5M8 11.5V14M2 8h2.5M11.5 8H14"/><circle cx="8" cy="8" r="2.2"/></svg>
+          <span>Run All Guardrail Checks Live</span>
+        </button>
+      </div>
+      <div id="mutation-run-status" class="mono" style="font-size:12px; color:var(--sage); margin-bottom:10px;">
+        Verifies that circuit grading and layout checks automatically catch broken logic gates, wrong resistor formulas, and overlapping labels. Click any row&rsquo;s "Visual Proof" button to inspect or re-run live above.
+      </div>
+      <div id="mutation-table"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="studio-footer">
+  <div class="studio-footer-inner">
+    <span class="footer-dev">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="var(--copper)" stroke-width="1.65" stroke-linecap="round"><path d="M5 5L2 8l3 3M11 5l3 3-3 3M9 3.5l-2 9"/></svg>
+      <span>Developed by <strong>Tejas Jaware</strong></span>
+    </span>
+    <a class="footer-repo-link" href="https://github.com/tejuas98/challng" target="_blank" rel="noopener noreferrer" title="Open SchemForge GitHub Repository">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span>github.com/tejuas98/challng</span>
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 10.5L11 5M6.5 5H11v4.5"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
