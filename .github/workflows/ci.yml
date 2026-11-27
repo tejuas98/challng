@@ -1,0 +1,56 @@
+name: SchemForge CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  test-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Tesseract OCR & fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-eng fonts-dejavu-core
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --no-deps -e .
+
+      - name: Run full pytest suite
+        run: PYTHONPATH=src pytest -v
+
+      - name: Enforce 100% mutation kill gate
+        run: |
+          PYTHONPATH=src python -m schemforge.cli mutate-test --out /tmp/mut.json
+          python -c "import json; d=json.load(open('/tmp/mut.json')); assert d['mutation_score'] == 1.0, d"
+
+      - name: Smoke test scalable generation, validation & HF/OpenAI export
+        run: |
+          PYTHONPATH=src python -m schemforge.cli generate --count 18 --seed 99 --workers 2 --out /tmp/ci_ds
+          PYTHONPATH=src python -m schemforge.cli validate --dataset /tmp/ci_ds/dataset.jsonl --out /tmp/ci_val.json
+          PYTHONPATH=src python -m schemforge.cli export --dataset /tmp/ci_ds/dataset.jsonl --format huggingface --out /tmp/ci_hf
+          PYTHONPATH=src python -m schemforge.cli export --dataset /tmp/ci_ds/dataset.jsonl --format openai-evals --out /tmp/ci_oai.jsonl
+          PYTHONPATH=src python -m schemforge.cli from-netlist --input examples/safety_interlock_netlist.json --out /tmp/ci_custom
+
+  register-deployment:
+    name: Production Deployment
+    needs: test-and-verify
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://schemforge-visual-task-factory.onrender.com
+    steps:
+      - name: Verify live Render health probe
+        run: curl -fsS --max-time 60 https://schemforge-visual-task-factory.onrender.com/healthz || echo "Render waking up; deployment URL registered."

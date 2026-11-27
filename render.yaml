@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: schemforge-visual-task-factory
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: SCHEMFORGE_MAX_API_BATCH
+        value: "5000"
+      - key: SCHEMFORGE_EVAL_MAX_LIMIT
+        value: "35"
+      - key: SCHEMFORGE_PROTECT_ENV_KEYS
+        value: "1"
+      - key: SCHEMFORGE_ARTIFACTS
+        value: /app/artifacts
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false

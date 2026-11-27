@@ -1,0 +1,14 @@
+.venv/
+.git/
+.pytest_cache/
+__pycache__/
+*.pyc
+artifacts/sample_dataset/
+artifacts/batches/
+artifacts/live_preview/
+artifacts/custom_preview/
+artifacts/exports/
+.DS_Store
+.env
+.env.*
+!.env.example
