@@ -1,43 +1,15 @@
-<div align="center">
+# <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg" /><source media="(prefers-color-scheme: light)" srcset="assets/logo-light.svg" /><img src="assets/logo-dark.svg" alt="SchemForge" width="30" height="30" align="absmiddle" /></picture> SchemForge
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg" />
-  <img src="assets/hero-dark.svg" alt="SchemForge — Seeded Visual Circuit Generator, Exact Solver & Verification Studio" width="100%" />
-</picture>
+Seeded visual circuit generator, exact mathematical solver, and Vision AI benchmark studio.
 
-<br /><br />
-
-<a href="https://schemforge-visual-task-factory.onrender.com"><strong>Open Live Studio</strong></a>
-&nbsp;&middot;&nbsp;
-<a href="#live-interactive-walkthrough"><strong>Live Demo</strong></a>
-&nbsp;&middot;&nbsp;
-<a href="#visual-tour-across-all-studio-tabs"><strong>Studio Tour</strong></a>
-&nbsp;&middot;&nbsp;
-<a href="#architecture--pipeline"><strong>Architecture</strong></a>
-&nbsp;&middot;&nbsp;
-<a href="#how-to-run"><strong>Quick Start</strong></a>
-&nbsp;&middot;&nbsp;
-<a href="docs/TECHNICAL_REPORT.md"><strong>Technical Report</strong></a>
-
-<br /><br />
-
-[![Live Deploy](https://img.shields.io/badge/Live_Demo-Online-10b981?style=flat-square&labelColor=161b22&logo=render&logoColor=46e3b7)](https://schemforge-visual-task-factory.onrender.com)
+[![Live Studio](https://img.shields.io/badge/Live_Studio-Render_Online-238636?style=flat-square&labelColor=1f242c&logo=render&logoColor=46e3b7)](https://schemforge-visual-task-factory.onrender.com)
 [![CI](https://github.com/tejuas98/challng/actions/workflows/ci.yml/badge.svg)](https://github.com/tejuas98/challng/actions/workflows/ci.yml)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776ab?style=flat-square&labelColor=161b22&logo=python&logoColor=white)](https://www.python.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=flat-square&labelColor=161b22&logo=docker&logoColor=white)](Dockerfile)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-316dca?style=flat-square&labelColor=1f242c&logo=python&logoColor=white)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-1f6feb?style=flat-square&labelColor=1f242c&logo=docker&logoColor=white)](Dockerfile)
 
-</div>
+## Live Walkthrough
 
----
-
-## Live Interactive Walkthrough
-
-> Recorded directly from the live production deployment: opening the quick guide, browsing schematics & custom frosted controls, switching accent themes, generating zero-duplicate custom question banks, compiling arrow-DSL circuits live (`ON -> OFF`), comparing Vision AI vs. baselines, and inspecting broken-circuit guardrails.
-
-<div align="center">
-  <img src="assets/schemforge-demo.gif" alt="SchemForge Live Interactive Walkthrough" width="100%" />
-</div>
+![SchemForge Live Interactive Walkthrough](assets/schemforge-demo.gif)
 
 ---
 
@@ -46,21 +18,21 @@
 <table>
   <tr>
     <td width="50%" align="center">
-      <strong>1. Browse Questions &amp; Verified Steps</strong><br /><br />
+      <strong>1. Browse Questions &amp; Verified Steps</strong><br />
       <img src="assets/tab1-browse-questions.png" alt="Browse Questions Studio" width="100%" />
     </td>
     <td width="50%" align="center">
-      <strong>2. Question Bank Library &amp; <code>.ZIP</code> Builder</strong><br /><br />
+      <strong>2. Question Bank Library &amp; <code>.ZIP</code> Builder</strong><br />
       <img src="assets/tab2-create-question-bank.png" alt="Create Question Bank Studio" width="100%" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <strong>3. Build Your Own Circuit (Live Arrow DSL)</strong><br /><br />
+      <strong>3. Build Your Own Circuit (Live Arrow DSL)</strong><br />
       <img src="assets/tab3-custom-circuit-builder.png" alt="Build Your Own Circuit" width="100%" />
     </td>
     <td width="50%" align="center">
-      <strong>4. AI Test Scores &amp; Model Comparison</strong><br /><br />
+      <strong>4. AI Test Scores &amp; Model Comparison</strong><br />
       <img src="assets/tab4-live-result-summary.png" alt="Live AI Test Summary" width="100%" />
     </td>
   </tr>
